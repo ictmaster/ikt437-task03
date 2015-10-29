@@ -1,0 +1,38 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://jonasn12.uia.io/ontology#hasRequirement>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Algebra>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#isRequirement>
+                <http://jonasn12.uia.io/ontology#Integrals> ;
+        <http://jonasn12.uia.io/ontology#isSubtopicOf>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#Double Integrals>
+        a       <http://jonasn12.uia.io/ontology#Topics> .
+
+<http://jonasn12.uia.io/ontology#Topics>
+        a       owl:Class ;
+        <http://jonasn12.uia.io/ontology#hasSubtopic>
+                <http://jonasn12.uia.io/ontology#Double Integrals> , <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#isRequirement>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Integrals>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasRequirement>
+                <http://jonasn12.uia.io/ontology#Algebra> ;
+        <http://jonasn12.uia.io/ontology#hasSubtopic>
+                <http://jonasn12.uia.io/ontology#Algebra> .
+
+<http://jonasn12.uia.io/ontology#hasSubtopic>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#isSubtopicOf>
+        a       owl:ObjectProperty .

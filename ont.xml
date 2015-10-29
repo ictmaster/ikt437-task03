@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://jonasn12.uia.io/ontology#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Class rdf:about="http://jonasn12.uia.io/ontology#Topics">
+    <j.0:hasSubtopic>
+      <j.0:Topics rdf:about="http://jonasn12.uia.io/ontology#Equations">
+        <j.0:hasRequirement>
+          <j.0:Topics rdf:about="http://jonasn12.uia.io/ontology#Algebra">
+            <j.0:isRequirement rdf:resource="http://jonasn12.uia.io/ontology#Equations"/>
+            <j.0:isSubtopicOf>
+              <j.0:Topics rdf:about="http://jonasn12.uia.io/ontology#Integrals">
+                <j.0:hasSubtopic rdf:resource="http://jonasn12.uia.io/ontology#Algebra"/>
+                <j.0:hasRequirement rdf:resource="http://jonasn12.uia.io/ontology#Algebra"/>
+              </j.0:Topics>
+            </j.0:isSubtopicOf>
+          </j.0:Topics>
+        </j.0:hasRequirement>
+      </j.0:Topics>
+    </j.0:hasSubtopic>
+    <j.0:hasSubtopic rdf:resource="http://jonasn12.uia.io/ontology#Algebra"/>
+    <j.0:hasSubtopic rdf:resource="http://jonasn12.uia.io/ontology#Integrals"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://jonasn12.uia.io/ontology#isRequirement"/>
+  <owl:ObjectProperty rdf:about="http://jonasn12.uia.io/ontology#isSubtopicOf"/>
+  <owl:ObjectProperty rdf:about="http://jonasn12.uia.io/ontology#hasSubtopic"/>
+  <owl:ObjectProperty rdf:about="http://jonasn12.uia.io/ontology#hasRequirement"/>
+</rdf:RDF>
