@@ -8,8 +8,6 @@ import org.apache.jena.rdf.model.NodeIterator;
 import org.apache.jena.rdf.model.Resource;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,13 +23,17 @@ public class GUI extends JFrame {
     private JTextArea output;
     private JButton addDepend;
     private JButton saveOntButton;
-    private JLabel Topics;
+    private JTabbedPane mainTabbedPane;
 
     //Some initialization
-    ObjectProperty isSubstopicOf;
-    ObjectProperty hasSubtopic;
-    ObjectProperty hasRequirement;
-    ObjectProperty isRequirement;
+    ObjectProperty isSubstopicOf; //Topic is subtopic of Topic
+    ObjectProperty hasSubtopic; //Topic has subtopic Topic
+    ObjectProperty hasRequirement; //Topic has requirement Topic
+    ObjectProperty isRequirement; //Topic has requirement Topic
+    ObjectProperty hasTopic; //Subject has Topic
+    ObjectProperty isTopicOf; //Topic is topic of Subject
+
+
     Individual newResource;
     List<String> dependantOn = new ArrayList<>();
     List<String> subtopics = new ArrayList<>();
@@ -42,7 +44,7 @@ public class GUI extends JFrame {
         setContentPane(rootPanel);
         pack();
         setVisible(true);
-        setBounds(100,100, 500,500);
+        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         String uri = "http://jonasn12.uia.io/ontology#";
@@ -51,28 +53,45 @@ public class GUI extends JFrame {
         model = ModelFactory.createOntologyModel();
 
         // Properties
-        ObjectProperty isSubstopicOf = model.createObjectProperty(uri + "isSubtopicOf");
+        ObjectProperty isSubtopicOf = model.createObjectProperty(uri + "isSubtopicOf");
         ObjectProperty hasSubtopic = model.createObjectProperty(uri + "hasSubtopic");
         ObjectProperty hasRequirement = model.createObjectProperty(uri + "hasRequirement");
         ObjectProperty isRequirement = model.createObjectProperty(uri + "isRequirement");
+        ObjectProperty hasTopic = model.createObjectProperty(uri + "hasTopic");
+        ObjectProperty isTopicOf = model.createObjectProperty(uri + "isTopicOf");
 
         // Configuring props..
-        isSubstopicOf.isInverseOf(hasSubtopic);
+        isSubtopicOf.isInverseOf(hasSubtopic);
         hasRequirement.isInverseOf(isRequirement);
+        hasTopic.isInverseOf(isTopicOf);
 
+        //Create classes
         OntClass topics = model.createClass(uri + "Topics");
-        //Create some topics to have
+        OntClass courses = model.createClass(uri + "Courses");
+
+        //Create some topics
         Individual advancedSubject = model.createIndividual(uri + "Integrals", topics);
         Individual baseSubject = model.createIndividual(uri + "Algebra", topics);
 
+        //Create some courses
+        Individual mathCourse = model.createIndividual(uri + "MA-154", courses);
+        Individual programmingCourse = model.createIndividual(uri + "DAT101", courses);
+
+        //Add some properties
         model.add(topics,hasSubtopic,advancedSubject);
         model.add(topics,hasSubtopic,baseSubject);
+        model.add(courses,hasTopic,mathCourse);
+        model.add(courses,hasTopic,programmingCourse);
 
+        //Set property values
+        mathCourse.setPropertyValue(hasTopic, baseSubject);
+        mathCourse.setPropertyValue(hasTopic, advancedSubject);
         advancedSubject.setPropertyValue(hasRequirement, baseSubject);
         advancedSubject.setPropertyValue(hasSubtopic, baseSubject);
-        baseSubject.setPropertyValue(isSubstopicOf, advancedSubject);
+        baseSubject.setPropertyValue(isSubtopicOf, advancedSubject);
         baseSubject.setPropertyValue(isRequirement, advancedSubject);
 
+        //Populate the dropdown with predefined courses
         populateDropDown(model, topics);
 
         createTopicButton.addActionListener(e -> {
@@ -89,8 +108,8 @@ public class GUI extends JFrame {
 
             if (!subtopics.isEmpty()) {
                 for (String item : subtopics) {
-                    newResource.setPropertyValue(isSubstopicOf, model.getIndividual(item));
-                    model.getIndividual(item).setPropertyValue(isSubstopicOf, newResource);
+                    newResource.setPropertyValue(isSubtopicOf, model.getIndividual(item));
+                    model.getIndividual(item).setPropertyValue(isSubtopicOf, newResource);
                 }
             }
 
@@ -100,10 +119,11 @@ public class GUI extends JFrame {
             subtopics.clear();
 
             NodeIterator allTopics = model.listObjectsOfProperty(topics, hasSubtopic);
-
+            /*
             while (allTopics.hasNext()) {
                 System.out.println(allTopics.nextNode());
             }
+            */
 
         });
 
@@ -113,7 +133,7 @@ public class GUI extends JFrame {
             try {
                 out = new FileWriter( "ont.ttl" );
                 model.write( out, "Turtle" );
-                System.out.println("Wrote ontology to file...");
+                output.append("Wrote ontology to file...");
             } catch (IOException w) {
                 w.printStackTrace();
             } finally {

@@ -3,6 +3,14 @@
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 
+<http://jonasn12.uia.io/ontology#MA-154>
+        a       <http://jonasn12.uia.io/ontology#Courses> ;
+        <http://jonasn12.uia.io/ontology#hasTopic>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#isTopicOf>
+        a       owl:ObjectProperty .
+
 <http://jonasn12.uia.io/ontology#hasRequirement>
         a       owl:ObjectProperty .
 
@@ -13,13 +21,21 @@
         <http://jonasn12.uia.io/ontology#isSubtopicOf>
                 <http://jonasn12.uia.io/ontology#Integrals> .
 
-<http://jonasn12.uia.io/ontology#Double Integrals>
-        a       <http://jonasn12.uia.io/ontology#Topics> .
+<http://jonasn12.uia.io/ontology#DAT101>
+        a       <http://jonasn12.uia.io/ontology#Courses> .
+
+<http://jonasn12.uia.io/ontology#hasTopic>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Courses>
+        a       owl:Class ;
+        <http://jonasn12.uia.io/ontology#hasTopic>
+                <http://jonasn12.uia.io/ontology#DAT101> , <http://jonasn12.uia.io/ontology#MA-154> .
 
 <http://jonasn12.uia.io/ontology#Topics>
         a       owl:Class ;
         <http://jonasn12.uia.io/ontology#hasSubtopic>
-                <http://jonasn12.uia.io/ontology#Double Integrals> , <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> .
+                <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> .
 
 <http://jonasn12.uia.io/ontology#isRequirement>
         a       owl:ObjectProperty .
