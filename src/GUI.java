@@ -8,8 +8,10 @@ import org.apache.jena.rdf.model.NodeIterator;
 import org.apache.jena.rdf.model.Resource;
 
 import javax.swing.*;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class GUI extends JFrame {
     private JComboBox courseTopicDrop;
     private JButton addTopicButton;
     private JButton saveCourseButton;
+    private JButton loadOntButton;
 
     //Some initialization
     ObjectProperty isSubtopicOf; //Topic is subtopic of Topic
@@ -118,6 +121,8 @@ public class GUI extends JFrame {
         Individual presentation = model.createIndividual(uri + "Presentation", learningTypes);
         Individual lecture = model.createIndividual(uri + "Lecture", learningTypes);
 
+
+        //ADD PREDEFINED STUFF
         //Create some topics
         Individual advancedSubject = model.createIndividual(uri + "Integrals", topics);
         Individual baseSubject = model.createIndividual(uri + "Algebra", topics);
@@ -147,116 +152,179 @@ public class GUI extends JFrame {
         advancedSubject.setPropertyValue(hasPracticalPart, presentation);
         lecture.setPropertyValue(isTheoreticalPart, baseSubject);
         baseSubject.setPropertyValue(hasTheoreticalPart, lecture);
-
+        //ADD PREDEFINED STUFF END
 
         //Populate the dropdown with predefined courses
         populateDropDown(model, topics, courses);
 
 
-        createTopicButton.addActionListener(e -> {
-            String resName = newTopic.getText();
+        createTopicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String resName = newTopic.getText();
 
-            newResource = model.createIndividual(uri + resName, topics);
-            model.add(topics, hasSubtopic, newResource);
+                newResource = model.createIndividual(uri + resName, topics);
+                model.add(topics, hasSubtopic, newResource);
 
-            if (!dependantOn.isEmpty()) {
-                for (String item : dependantOn) {
-                    newResource.setPropertyValue(hasRequirement, model.getIndividual(item));
-                    model.getIndividual(item).setPropertyValue(isRequirement, newResource);
+                if (!dependantOn.isEmpty()) {
+                    for (String item : dependantOn) {
+                        newResource.setPropertyValue(hasRequirement, model.getIndividual(item));
+                        model.getIndividual(item).setPropertyValue(isRequirement, newResource);
+                    }
                 }
-            }
 
-            if (!subtopics.isEmpty()) {
-                for (String item : subtopics) {
-                    newResource.setPropertyValue(isSubtopicOf, model.getIndividual(item));
-                    model.getIndividual(item).setPropertyValue(isSubtopicOf, newResource);
+                if (!subtopics.isEmpty()) {
+                    for (String item : subtopics) {
+                        newResource.setPropertyValue(isSubtopicOf, model.getIndividual(item));
+                        model.getIndividual(item).setPropertyValue(isSubtopicOf, newResource);
+                    }
                 }
+
+                if (!types.isEmpty()) {
+                    for (String item : types) {
+
+                        if (item.equals("Presentation")) {
+                            newResource.setPropertyValue(hasPracticalPart, model.getIndividual(uri+item));
+                            model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+
+                        } else if (item.equals("Lecture")) {
+                            newResource.setPropertyValue(hasTheoreticalPart, model.getIndividual(uri+item));
+                            model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+                        }
+                    }
+                }
+                output.append("Added topic : " + resName + "\n");
+                populateDropDown(model, topics, courses);
+
+                dependantOn.clear();
+                subtopics.clear();
+                types.clear();
             }
+        });
 
-            if (!types.isEmpty()) {
-                for (String item : types) {
+        saveCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cName = courseName.getText();
+                newResource = model.createIndividual(uri + cName, courses);
+                model.add(courses, hasTopic, newResource);
 
-                    if (item.equals("Presentation")) {
-                        newResource.setPropertyValue(hasPracticalPart, model.getIndividual(uri+item));
-                        model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+                if(!courseHasTopic.isEmpty()){
+                    for (String item : courseHasTopic) {
+                        newResource.setPropertyValue(hasTopic, model.getIndividual(item));
+                        model.getIndividual(item).setPropertyValue(hasTopic, newResource);
+                    }
+                }
+                output.append("Added course : " + cName + "\n");
+                courseHasTopic.clear();
+                populateDropDown(model, topics, courses);
+            }
+        });
 
-                    } else if (item.equals("Lecture")) {
-                        newResource.setPropertyValue(hasTheoreticalPart, model.getIndividual(uri+item));
-                        model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+        loadOntButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JFileChooser jfc = new JFileChooser();
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Turtle File", "ttl");
+                    jfc.setFileFilter(filter);
+                    File currentDir = new File(System.getProperty("user.dir"));
+                    jfc.setCurrentDirectory(currentDir);
+
+                    int returnVal = jfc.showOpenDialog(getParent());
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+                        FileReader in = new FileReader(jfc.getSelectedFile());
+                        model.read(new FileInputStream(jfc.getSelectedFile().getPath()),null, "TTL");
+
+                                //model.read(in, uri); TODO: Fix this error
+
+                                output.append("Loaded ontology from file '" + jfc.getSelectedFile().getName() + "'...\n");
+                    } else {
+                        output.append("Loading ontology canceled...\n");
+                    }
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                populateDropDown(model, topics, courses);
+            }
+        });
+
+        saveOntButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileWriter out = null;
+                JFileChooser jfc = new JFileChooser();
+                try {
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Turtle File", "ttl");
+                    jfc.setFileFilter(filter);
+                    File currentDir = new File(System.getProperty("user.dir"));
+                    jfc.setCurrentDirectory(currentDir);
+
+                    int returnVal = jfc.showSaveDialog(getParent());
+                    if(returnVal == JFileChooser.APPROVE_OPTION){
+                        out = new FileWriter( jfc.getSelectedFile() );
+                        model.write( out, "Turtle" );
+                        output.append("Wrote ontology to file '"+jfc.getSelectedFile().getName()+"'...\n");
+                    }else{
+                        output.append("Writing ontology canceled...\n");
+                    }
+                } catch (IOException w) {
+                    w.printStackTrace();
+                } finally {
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException ignore) {
+                        }
                     }
                 }
             }
-            output.append("Added topic : " + resName + "\n");
-            populateDropDown(model, topics, courses);
-
-            dependantOn.clear();
-            subtopics.clear();
-            types.clear();
-
         });
 
-        saveCourseButton.addActionListener(e -> {
-            String cName = courseName.getText();
-            newResource = model.createIndividual(uri + cName, courses);
-            model.add(courses, hasTopic, newResource);
-
-            if(!courseHasTopic.isEmpty()){
-                for (String item : courseHasTopic) {
-                    newResource.setPropertyValue(hasTopic, model.getIndividual(item));
-                    model.getIndividual(item).setPropertyValue(hasTopic, newResource);
-                }
-            }
-            output.append("Added course : " + cName + "\n");
-            courseHasTopic.clear();
-            populateDropDown(model, topics, courses);
-        });
-
-        saveOntButton.addActionListener(e -> {
-
-            FileWriter out = null;
-            try {
-                out = new FileWriter( "ont.ttl" );
-                model.write( out, "Turtle" );
-                output.append("Wrote ontology to file...\n");
-            } catch (IOException w) {
-                w.printStackTrace();
-            } finally {
-                if (out != null) {
-                    try {out.close();} catch (IOException ignore) {}
+        addTopicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = courseTopicDrop.getSelectedItem().toString();
+                if(!selected.equals("None")){
+                    courseHasTopic.add(selected);
+                    output.append("Added topic : " + selected + "\n");
                 }
             }
         });
 
-        addTopicButton.addActionListener(e -> {
-            String selected = courseTopicDrop.getSelectedItem().toString();
-            if(!selected.equals("None")){
-                courseHasTopic.add(selected);
-                output.append("Added topic : " + selected + "\n");
+        addType.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = typeDrop.getSelectedItem().toString();
+                if(!selected.equals("None")) {
+                    types.add(selected);
+                    output.append("Added type : " + selected + "\n");
+                }
             }
         });
 
-
-        addType.addActionListener(e -> {
-            String selected = typeDrop.getSelectedItem().toString();
-            if(!selected.equals("None")) {
-                types.add(selected);
-                output.append("Added type : " + selected + "\n");
+        addDepend.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = dependsDrop.getSelectedItem().toString();
+                if (!selected.equals("None")) {
+                    dependantOn.add(selected);
+                    output.append("Added dependency : " + selected + "\n");
+                }
             }
         });
 
-        addDepend.addActionListener(e -> {
-            String selected = dependsDrop.getSelectedItem().toString();
-            if (!selected.equals("None")) {
-                dependantOn.add(selected);
-                output.append("Added dependency : " + selected + "\n");
-            }
-        });
-
-        addSub.addActionListener(e -> {
-            String selected = subtopicOf.getSelectedItem().toString();
-            if (!selected.equals("None")) {
-                subtopics.add(selected);
-                output.append("Added subtopic : " + selected + "\n");
+        addSub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = subtopicOf.getSelectedItem().toString();
+                if (!selected.equals("None")) {
+                    subtopics.add(selected);
+                    output.append("Added subtopic : " + selected + "\n");
+                }
             }
         });
     }
