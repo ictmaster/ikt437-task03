@@ -17,38 +17,47 @@
         <http://jonasn12.uia.io/ontology#hasTopic>
                 <http://jonasn12.uia.io/ontology#DAT101> , <http://jonasn12.uia.io/ontology#MA-154> .
 
+<http://jonasn12.uia.io/ontology#Equations>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Presentation> .
+
 <http://jonasn12.uia.io/ontology#Algebra>
         a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Lecture> ;
         <http://jonasn12.uia.io/ontology#isRequirement>
                 <http://jonasn12.uia.io/ontology#Integrals> ;
         <http://jonasn12.uia.io/ontology#isSubtopicOf>
                 <http://jonasn12.uia.io/ontology#Integrals> .
 
-<http://jonasn12.uia.io/ontology#Kake>
-        a       <http://jonasn12.uia.io/ontology#Topics> ;
-        <http://jonasn12.uia.io/ontology#hasRequirement>
-                <http://jonasn12.uia.io/ontology#Integrals> ;
-        <http://jonasn12.uia.io/ontology#isSubtopicOf>
+<http://jonasn12.uia.io/ontology#Presentation>
+        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Equations> ;
+        <http://jonasn12.uia.io/ontology#isPracticalPart>
                 <http://jonasn12.uia.io/ontology#Integrals> .
 
 <http://jonasn12.uia.io/ontology#Integrals>
         a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Presentation> ;
         <http://jonasn12.uia.io/ontology#hasRequirement>
                 <http://jonasn12.uia.io/ontology#Algebra> ;
         <http://jonasn12.uia.io/ontology#hasSubtopic>
-                <http://jonasn12.uia.io/ontology#Algebra> ;
-        <http://jonasn12.uia.io/ontology#isRequirement>
-                <http://jonasn12.uia.io/ontology#Kake> ;
-        <http://jonasn12.uia.io/ontology#isSubtopicOf>
-                <http://jonasn12.uia.io/ontology#Kake> .
+                <http://jonasn12.uia.io/ontology#Algebra> .
 
 <http://jonasn12.uia.io/ontology#hasRequirement>
         a       owl:ObjectProperty .
 
 <http://jonasn12.uia.io/ontology#Topics>
         a       owl:Class ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Presentation> ;
         <http://jonasn12.uia.io/ontology#hasSubtopic>
-                <http://jonasn12.uia.io/ontology#Kake> , <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> .
+                <http://jonasn12.uia.io/ontology#Equations> , <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> ;
+        <http://jonasn12.uia.io/ontology#hasTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Lecture> .
 
 <http://jonasn12.uia.io/ontology#isTheoreticalPart>
         a       owl:ObjectProperty .
@@ -56,27 +65,13 @@
 <http://jonasn12.uia.io/ontology#isSubtopicOf>
         a       owl:ObjectProperty .
 
-<http://jonasn12.uia.io/ontology#Practical>
-        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
-        <http://jonasn12.uia.io/ontology#isPracticalPart>
-                <http://jonasn12.uia.io/ontology#Integrals> .
-
-<http://jonasn12.uia.io/ontology#Theoretical>
-        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
-        <http://jonasn12.uia.io/ontology#isTheoreticalPart>
-                <http://jonasn12.uia.io/ontology#Integrals> .
-
 <http://jonasn12.uia.io/ontology#MA-154>
         a       <http://jonasn12.uia.io/ontology#Courses> ;
         <http://jonasn12.uia.io/ontology#hasTopic>
                 <http://jonasn12.uia.io/ontology#Integrals> .
 
 <http://jonasn12.uia.io/ontology#Learningtypes>
-        a       owl:Class ;
-        <http://jonasn12.uia.io/ontology#isPracticalPart>
-                <http://jonasn12.uia.io/ontology#Practical> ;
-        <http://jonasn12.uia.io/ontology#isTheoreticalPart>
-                <http://jonasn12.uia.io/ontology#Theoretical> .
+        a       owl:Class .
 
 <http://jonasn12.uia.io/ontology#isRequirement>
         a       owl:ObjectProperty .
@@ -89,6 +84,11 @@
 
 <http://jonasn12.uia.io/ontology#hasSubtopic>
         a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Lecture>
+        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
+        <http://jonasn12.uia.io/ontology#isTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Algebra> .
 
 <http://jonasn12.uia.io/ontology#hasTheoreticalPart>
         a       owl:ObjectProperty .

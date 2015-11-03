@@ -27,6 +27,10 @@ public class GUI extends JFrame {
     private JScrollPane outputScroller;
     private JComboBox typeDrop;
     private JButton addType;
+    private JTextField courseName;
+    private JComboBox courseTopicDrop;
+    private JButton addTopicButton;
+    private JButton saveCourseButton;
 
     //Some initialization
     ObjectProperty isSubtopicOf; //Topic is subtopic of Topic
@@ -55,6 +59,22 @@ public class GUI extends JFrame {
         //Workaround for annoying width-changing dropdowns
         dependsDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         subtopicOf.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+
+
+        //for(int i =0;i < UIManager.getInstalledLookAndFeels().length; i++)
+        //    System.out.println(UIManager.getInstalledLookAndFeels()[i]);
+
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
 
         setTitle("Jonas' Amazing Ontology Program");
         setContentPane(rootPanel);
