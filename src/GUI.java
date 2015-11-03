@@ -2,6 +2,7 @@ import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.ObjectProperty;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.NodeIterator;
@@ -38,6 +39,9 @@ public class GUI extends JFrame {
     private JButton deleteCourseButton;
     private JComboBox deleteTopicDrop;
     private JButton deleteTopicButton;
+    private JTextArea sparql;
+    private JButton sparqlButton;
+
 
     //Some initialization
     ObjectProperty isSubtopicOf; //Topic is subtopic of Topic
@@ -70,10 +74,7 @@ public class GUI extends JFrame {
         deleteCourseDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         deleteTopicDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
 
-
-        //for(int i =0;i < UIManager.getInstalledLookAndFeels().length; i++)
-        //    System.out.println(UIManager.getInstalledLookAndFeels()[i]);
-
+        //Looks cooler :)
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
         } catch (ClassNotFoundException e) {
@@ -127,8 +128,6 @@ public class GUI extends JFrame {
         Individual presentation = model.createIndividual(uri + "Presentation", learningTypes);
         Individual lecture = model.createIndividual(uri + "Lecture", learningTypes);
 
-
-        //ADD PREDEFINED STUFF
         //Create some topics
         Individual advancedSubject = model.createIndividual(uri + "Integrals", topics);
         Individual baseSubject = model.createIndividual(uri + "Algebra", topics);
@@ -158,11 +157,12 @@ public class GUI extends JFrame {
         advancedSubject.setPropertyValue(hasPracticalPart, presentation);
         lecture.setPropertyValue(isTheoreticalPart, baseSubject);
         baseSubject.setPropertyValue(hasTheoreticalPart, lecture);
-        //ADD PREDEFINED STUFF END
 
-        //Populate the dropdown with predefined courses
+        //Initial population of the dropdowns
         populateDropDown(model, topics, courses);
 
+
+        //LISTENERS (not using lambdas cause of not collapsible in intellij)
 
         createTopicButton.addActionListener(new ActionListener() {
             @Override
@@ -242,10 +242,7 @@ public class GUI extends JFrame {
 
                         FileReader in = new FileReader(jfc.getSelectedFile());
                         model.read(new FileInputStream(jfc.getSelectedFile().getPath()),null, "TTL");
-
-                                //model.read(in, uri); TODO: Fix this error
-
-                                output.append("Loaded ontology from file '" + jfc.getSelectedFile().getName() + "'...\n");
+                        output.append("Loaded ontology from file '" + jfc.getSelectedFile().getName() + "'...\n");
                     } else {
                         output.append("Loading ontology canceled...\n");
                     }
@@ -355,6 +352,38 @@ public class GUI extends JFrame {
                 populateDropDown(model, topics, courses);
             }
         });
+
+        sparqlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String prefixes = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
+                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
+                        "PREFIX jonas: <http://jonasn12.uia.io/ontology#>";
+
+                String queryString = sparql.getText();
+                Query query = QueryFactory.create(prefixes+queryString);
+                QueryExecution execution = QueryExecutionFactory.create(query, model);
+                ResultSet result = execution.execSelect();
+
+                String resultString = ResultSetFormatter.asText(result);
+
+                output.append(resultString);
+
+                JTextArea results = new JTextArea(resultString);
+                JFrame displayStuff = new JFrame();
+                JScrollPane jsp = new JScrollPane(results);
+
+                displayStuff.setTitle("SPARQL Query Results");
+                displayStuff.setExtendedState(displayStuff.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+                displayStuff.setVisible(true);
+                displayStuff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                displayStuff.add(jsp);
+            }
+        });
+
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
