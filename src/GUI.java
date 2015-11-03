@@ -24,27 +24,43 @@ public class GUI extends JFrame {
     private JButton addDepend;
     private JButton saveOntButton;
     private JTabbedPane mainTabbedPane;
+    private JScrollPane outputScroller;
+    private JComboBox typeDrop;
+    private JButton addType;
 
     //Some initialization
-    ObjectProperty isSubstopicOf; //Topic is subtopic of Topic
+    ObjectProperty isSubtopicOf; //Topic is subtopic of Topic
     ObjectProperty hasSubtopic; //Topic has subtopic Topic
+
     ObjectProperty hasRequirement; //Topic has requirement Topic
     ObjectProperty isRequirement; //Topic has requirement Topic
-    ObjectProperty hasTopic; //Subject has Topic
-    ObjectProperty isTopicOf; //Topic is topic of Subject
 
+    ObjectProperty hasTopic; //Course has Topic
+    ObjectProperty isTopicOf; //Topic is topic of Course
+
+    ObjectProperty hasPracticalPart; //Topic has practical part
+    ObjectProperty isPracticalPart; //Learningtype is Practical part of Topic
+
+    ObjectProperty hasTheoreticalPart; //Topic has theoretical part
+    ObjectProperty isTheoreticalPart;  //Learningtype is theoretical part of Topic
 
     Individual newResource;
     List<String> dependantOn = new ArrayList<>();
     List<String> subtopics = new ArrayList<>();
+    List<String> types = new ArrayList<>();
 
     OntModel model;
 
     public GUI() {
+        //Workaround for annoying width-changing dropdowns
+        dependsDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        subtopicOf.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+
+        setTitle("Jonas' Amazing Ontology Program");
         setContentPane(rootPanel);
         pack();
         setVisible(true);
-        setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         String uri = "http://jonasn12.uia.io/ontology#";
@@ -53,21 +69,32 @@ public class GUI extends JFrame {
         model = ModelFactory.createOntologyModel();
 
         // Properties
-        ObjectProperty isSubtopicOf = model.createObjectProperty(uri + "isSubtopicOf");
-        ObjectProperty hasSubtopic = model.createObjectProperty(uri + "hasSubtopic");
-        ObjectProperty hasRequirement = model.createObjectProperty(uri + "hasRequirement");
-        ObjectProperty isRequirement = model.createObjectProperty(uri + "isRequirement");
-        ObjectProperty hasTopic = model.createObjectProperty(uri + "hasTopic");
-        ObjectProperty isTopicOf = model.createObjectProperty(uri + "isTopicOf");
+        isSubtopicOf = model.createObjectProperty(uri + "isSubtopicOf");
+        hasSubtopic = model.createObjectProperty(uri + "hasSubtopic");
+        hasRequirement = model.createObjectProperty(uri + "hasRequirement");
+        isRequirement = model.createObjectProperty(uri + "isRequirement");
+        hasTopic = model.createObjectProperty(uri + "hasTopic");
+        isTopicOf = model.createObjectProperty(uri + "isTopicOf");
+        hasPracticalPart = model.createObjectProperty(uri + "hasPracticalPart");
+        isPracticalPart = model.createObjectProperty(uri + "isPracticalPart");
+        hasTheoreticalPart = model.createObjectProperty(uri + "hasTheoreticalPart");
+        isTheoreticalPart = model.createObjectProperty(uri + "isTheoreticalPart");
 
         // Configuring props..
         isSubtopicOf.isInverseOf(hasSubtopic);
         hasRequirement.isInverseOf(isRequirement);
         hasTopic.isInverseOf(isTopicOf);
+        hasPracticalPart.isInverseOf(isPracticalPart);
+        hasTheoreticalPart.isInverseOf(isTheoreticalPart);
 
         //Create classes
         OntClass topics = model.createClass(uri + "Topics");
         OntClass courses = model.createClass(uri + "Courses");
+        OntClass learningTypes = model.createClass(uri + "Learningtypes");
+
+        //Create some learning types
+        Individual presentation = model.createIndividual(uri + "Presentation", learningTypes);
+        Individual lecture = model.createIndividual(uri + "Lecture", learningTypes);
 
         //Create some topics
         Individual advancedSubject = model.createIndividual(uri + "Integrals", topics);
@@ -82,6 +109,8 @@ public class GUI extends JFrame {
         model.add(topics,hasSubtopic,baseSubject);
         model.add(courses,hasTopic,mathCourse);
         model.add(courses,hasTopic,programmingCourse);
+        model.add(topics, hasPracticalPart, presentation);
+        model.add(topics, hasTheoreticalPart, lecture);
 
         //Set property values
         mathCourse.setPropertyValue(hasTopic, baseSubject);
@@ -91,8 +120,15 @@ public class GUI extends JFrame {
         baseSubject.setPropertyValue(isSubtopicOf, advancedSubject);
         baseSubject.setPropertyValue(isRequirement, advancedSubject);
 
+        presentation.setPropertyValue(isPracticalPart, advancedSubject);
+        advancedSubject.setPropertyValue(hasPracticalPart, presentation);
+        lecture.setPropertyValue(isTheoreticalPart, baseSubject);
+        baseSubject.setPropertyValue(hasTheoreticalPart, lecture);
+
+
         //Populate the dropdown with predefined courses
         populateDropDown(model, topics);
+
 
         createTopicButton.addActionListener(e -> {
             String resName = newTopic.getText();
@@ -113,17 +149,25 @@ public class GUI extends JFrame {
                 }
             }
 
+            if (!types.isEmpty()) {
+                for (String item : types) {
+
+                    if (item.equals("Presentation")) {
+                        newResource.setPropertyValue(hasPracticalPart, model.getIndividual(uri+item));
+                        model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+
+                    } else if (item.equals("Lecture")) {
+                        newResource.setPropertyValue(hasTheoreticalPart, model.getIndividual(uri+item));
+                        model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+                    }
+                }
+            }
+
             populateDropDown(model, topics);
 
             dependantOn.clear();
             subtopics.clear();
-
-            NodeIterator allTopics = model.listObjectsOfProperty(topics, hasSubtopic);
-            /*
-            while (allTopics.hasNext()) {
-                System.out.println(allTopics.nextNode());
-            }
-            */
+            types.clear();
 
         });
 
@@ -133,7 +177,7 @@ public class GUI extends JFrame {
             try {
                 out = new FileWriter( "ont.ttl" );
                 model.write( out, "Turtle" );
-                output.append("Wrote ontology to file...");
+                output.append("Wrote ontology to file...\n");
             } catch (IOException w) {
                 w.printStackTrace();
             } finally {
@@ -143,50 +187,58 @@ public class GUI extends JFrame {
             }
         });
 
-        // Listeners
+        addType.addActionListener(e -> {
+            String selected = typeDrop.getSelectedItem().toString();
+            if(!selected.equals("None")) {
+                types.add(selected);
+                output.append(" Added type : " + selected + "\n");
+            }
+        });
+
         addDepend.addActionListener(e -> {
             String selected = dependsDrop.getSelectedItem().toString();
             if(!selected.equals("None")) {
-                output.append(" Added dependency : " + selected + "\n");
                 dependantOn.add(selected);
+                output.append(" Added dependency : " + selected + "\n");
             }
         });
 
         addSub.addActionListener(e -> {
             String selected = subtopicOf.getSelectedItem().toString();
             if(!selected.equals("None")) {
-            output.append(" Added subtopic : " + selected+"\n");
-            subtopics.add(selected);
-
+                subtopics.add(selected);
+                output.append(" Added subtopic : " + selected + "\n");
             }
         });
     }
 
-        public void populateDropDown(Model model, Resource topics) {
+    public void populateDropDown(Model model, Resource topics) {
 
-            dependsDrop.removeAllItems();
-            subtopicOf.removeAllItems();
-            dependsDrop.validate();
-            subtopicOf.validate();
+        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop};
 
-            NodeIterator allTopics = model.listObjectsOfProperty(topics, hasSubtopic);
-
-            // Get model....
-            Resource test = model.getResource("Algebra");
-            System.out.println(test);
-
-            List<String> resourceList = new ArrayList<>();
-
-            while (allTopics.hasNext()) {
-                resourceList.add(allTopics.nextNode().toString());
-            }
-
-            dependsDrop.addItem("None");
-            subtopicOf.addItem("None");
-
-            for (String item : resourceList) {
-                dependsDrop.addItem(item);
-                subtopicOf.addItem(item);
-            }
+        for(int i = 0; i < drops.length; i++){
+            drops[i].removeAllItems();
+            drops[i].validate();
         }
+
+        NodeIterator allTopics = model.listObjectsOfProperty(topics, hasSubtopic);
+        List<String> resourceList = new ArrayList<>();
+
+        while (allTopics.hasNext()) {
+            resourceList.add(allTopics.nextNode().toString());
+        }
+
+        for(int i = 0; i < drops.length; i++){
+            drops[i].addItem("None");
+        }
+
+        for (String item : resourceList) {
+            dependsDrop.addItem(item);
+            subtopicOf.addItem(item);
+        }
+
+        typeDrop.addItem("Presentation");
+        typeDrop.addItem("Lecture");
+
     }
+}
