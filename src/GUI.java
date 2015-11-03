@@ -181,7 +181,7 @@ public class GUI extends JFrame {
 
                 if (!subtopics.isEmpty()) {
                     for (String item : subtopics) {
-                        newResource.setPropertyValue(isSubtopicOf, model.getIndividual(item));
+                        newResource.setPropertyValue(hasSubtopic, model.getIndividual(item));
                         model.getIndividual(item).setPropertyValue(isSubtopicOf, newResource);
                     }
                 }
@@ -239,8 +239,6 @@ public class GUI extends JFrame {
 
                     int returnVal = jfc.showOpenDialog(getParent());
                     if (returnVal == JFileChooser.APPROVE_OPTION) {
-
-                        FileReader in = new FileReader(jfc.getSelectedFile());
                         model.read(new FileInputStream(jfc.getSelectedFile().getPath()),null, "TTL");
                         output.append("Loaded ontology from file '" + jfc.getSelectedFile().getName() + "'...\n");
                     } else {

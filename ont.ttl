@@ -1,218 +1,98 @@
-@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.w3.org/2002/07/owl#> .
-
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://jonasn12.uia.io/ontology#hasPracticalPart
-
-<http://jonasn12.uia.io/ontology#hasPracticalPart> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#hasRequirement
-
-<http://jonasn12.uia.io/ontology#hasRequirement> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#hasSubtopic
-
-<http://jonasn12.uia.io/ontology#hasSubtopic> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#hasTheoreticalPart
-
-<http://jonasn12.uia.io/ontology#hasTheoreticalPart> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#hasTopic
-
-<http://jonasn12.uia.io/ontology#hasTopic> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#isPracticalPart
-
-<http://jonasn12.uia.io/ontology#isPracticalPart> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#isRequirement
-
-<http://jonasn12.uia.io/ontology#isRequirement> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#isSubtopicOf
-
-<http://jonasn12.uia.io/ontology#isSubtopicOf> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#isTheoreticalPart
-
-<http://jonasn12.uia.io/ontology#isTheoreticalPart> rdf:type owl:ObjectProperty .
-
-
-
-###  http://jonasn12.uia.io/ontology#isTopicOf
-
-<http://jonasn12.uia.io/ontology#isTopicOf> rdf:type owl:ObjectProperty .
-
-
-
-
-
-#################################################################
-#
-#    Classes
-#
-#################################################################
-
-
-###  http://jonasn12.uia.io/ontology#Courses
-
-<http://jonasn12.uia.io/ontology#Courses> rdf:type owl:Class .
-
-
-
-###  http://jonasn12.uia.io/ontology#Learningtypes
-
-<http://jonasn12.uia.io/ontology#Learningtypes> rdf:type owl:Class .
-
-
-
-###  http://jonasn12.uia.io/ontology#Topics
-
-<http://jonasn12.uia.io/ontology#Topics> rdf:type owl:Class .
-
-
-
-###  http://www.co-ode.org/ontologies/ont.owl#geg
-
-<http://www.co-ode.org/ontologies/ont.owl#geg> rdf:type owl:Class .
-
-
-
-
-
-#################################################################
-#
-#    Individuals
-#
-#################################################################
-
-
-###  http://jonasn12.uia.io/ontology#Algebra
-
-<http://jonasn12.uia.io/ontology#Algebra> rdf:type <http://jonasn12.uia.io/ontology#Topics> ,
-                                                   owl:NamedIndividual ;
-                                          
-                                          <http://jonasn12.uia.io/ontology#isSubtopicOf> <http://jonasn12.uia.io/ontology#Fancytopic> ;
-                                          
-                                          <http://jonasn12.uia.io/ontology#isRequirement> <http://jonasn12.uia.io/ontology#Integrals> ;
-                                          
-                                          <http://jonasn12.uia.io/ontology#hasTheoreticalPart> <http://jonasn12.uia.io/ontology#Lecture> .
-
-
-
-###  http://jonasn12.uia.io/ontology#Courses
-
-<http://jonasn12.uia.io/ontology#Courses> rdf:type owl:NamedIndividual ;
-                                          
-                                          <http://jonasn12.uia.io/ontology#hasTopic> <http://jonasn12.uia.io/ontology#DAT101> ,
-                                                                                     <http://jonasn12.uia.io/ontology#MA-154> .
-
-
-
-###  http://jonasn12.uia.io/ontology#DAT101
-
-<http://jonasn12.uia.io/ontology#DAT101> rdf:type <http://jonasn12.uia.io/ontology#Courses> ,
-                                                  owl:NamedIndividual .
-
-
-
-###  http://jonasn12.uia.io/ontology#Fancytopic
-
-<http://jonasn12.uia.io/ontology#Fancytopic> rdf:type <http://jonasn12.uia.io/ontology#Topics> ,
-                                                      owl:NamedIndividual ;
-                                             
-                                             <http://jonasn12.uia.io/ontology#isSubtopicOf> <http://jonasn12.uia.io/ontology#Algebra> ;
-                                             
-                                             <http://jonasn12.uia.io/ontology#hasRequirement> <http://jonasn12.uia.io/ontology#Integrals> .
-
-
-
-###  http://jonasn12.uia.io/ontology#Integrals
-
-<http://jonasn12.uia.io/ontology#Integrals> rdf:type <http://jonasn12.uia.io/ontology#Topics> ,
-                                                     owl:NamedIndividual ;
-                                            
-                                            <http://jonasn12.uia.io/ontology#hasRequirement> <http://jonasn12.uia.io/ontology#Algebra> ;
-                                            
-                                            <http://jonasn12.uia.io/ontology#hasSubtopic> <http://jonasn12.uia.io/ontology#Algebra> ;
-                                            
-                                            <http://jonasn12.uia.io/ontology#isRequirement> <http://jonasn12.uia.io/ontology#Fancytopic> ;
-                                            
-                                            <http://jonasn12.uia.io/ontology#hasPracticalPart> <http://jonasn12.uia.io/ontology#Presentation> .
-
-
-
-###  http://jonasn12.uia.io/ontology#Lecture
-
-<http://jonasn12.uia.io/ontology#Lecture> rdf:type <http://jonasn12.uia.io/ontology#Learningtypes> ,
-                                                   owl:NamedIndividual ;
-                                          
-                                          <http://jonasn12.uia.io/ontology#isTheoreticalPart> <http://jonasn12.uia.io/ontology#Algebra> .
-
-
-
-###  http://jonasn12.uia.io/ontology#MA-154
-
-<http://jonasn12.uia.io/ontology#MA-154> rdf:type <http://jonasn12.uia.io/ontology#Courses> ,
-                                                  owl:NamedIndividual ;
-                                         
-                                         <http://jonasn12.uia.io/ontology#hasTopic> <http://jonasn12.uia.io/ontology#Integrals> .
-
-
-
-###  http://jonasn12.uia.io/ontology#Presentation
-
-<http://jonasn12.uia.io/ontology#Presentation> rdf:type <http://jonasn12.uia.io/ontology#Learningtypes> ,
-                                                        owl:NamedIndividual ;
-                                               
-                                               <http://jonasn12.uia.io/ontology#isPracticalPart> <http://jonasn12.uia.io/ontology#Integrals> .
-
-
-
-###  http://jonasn12.uia.io/ontology#Topics
-
-<http://jonasn12.uia.io/ontology#Topics> rdf:type owl:NamedIndividual ;
-                                         
-                                         <http://jonasn12.uia.io/ontology#hasSubtopic> <http://jonasn12.uia.io/ontology#Algebra> ,
-                                                                                       <http://jonasn12.uia.io/ontology#Fancytopic> ,
-                                                                                       <http://jonasn12.uia.io/ontology#Integrals> ;
-                                         
-                                         <http://jonasn12.uia.io/ontology#hasTheoreticalPart> <http://jonasn12.uia.io/ontology#Lecture> ;
-                                         
-                                         <http://jonasn12.uia.io/ontology#hasPracticalPart> <http://jonasn12.uia.io/ontology#Presentation> .
-
-
-
-
-###  Generated by the OWL API (version 3.5.1) http://owlapi.sourceforge.net
-
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://jonasn12.uia.io/ontology#hasPracticalPart>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#hasTopic>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#DAT101>
+        a       <http://jonasn12.uia.io/ontology#Courses> .
+
+<http://jonasn12.uia.io/ontology#Courses>
+        a       owl:Class ;
+        <http://jonasn12.uia.io/ontology#hasTopic>
+                <http://jonasn12.uia.io/ontology#DAT101> , <http://jonasn12.uia.io/ontology#MA-154> .
+
+<http://jonasn12.uia.io/ontology#Algebra>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Lecture> ;
+        <http://jonasn12.uia.io/ontology#isRequirement>
+                <http://jonasn12.uia.io/ontology#Integrals> ;
+        <http://jonasn12.uia.io/ontology#isSubtopicOf>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#Presentation>
+        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
+        <http://jonasn12.uia.io/ontology#isPracticalPart>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#Integrals>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Presentation> ;
+        <http://jonasn12.uia.io/ontology#hasRequirement>
+                <http://jonasn12.uia.io/ontology#Algebra> ;
+        <http://jonasn12.uia.io/ontology#hasSubtopic>
+                <http://jonasn12.uia.io/ontology#Algebra> ;
+        <http://jonasn12.uia.io/ontology#isRequirement>
+                <http://jonasn12.uia.io/ontology#Plus> ;
+        <http://jonasn12.uia.io/ontology#isSubtopicOf>
+                <http://jonasn12.uia.io/ontology#Plus> .
+
+<http://jonasn12.uia.io/ontology#hasRequirement>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Topics>
+        a       owl:Class ;
+        <http://jonasn12.uia.io/ontology#hasPracticalPart>
+                <http://jonasn12.uia.io/ontology#Presentation> ;
+        <http://jonasn12.uia.io/ontology#hasSubtopic>
+                <http://jonasn12.uia.io/ontology#Plus> , <http://jonasn12.uia.io/ontology#Algebra> , <http://jonasn12.uia.io/ontology#Integrals> ;
+        <http://jonasn12.uia.io/ontology#hasTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Lecture> .
+
+<http://jonasn12.uia.io/ontology#isTheoreticalPart>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Plus>
+        a       <http://jonasn12.uia.io/ontology#Topics> ;
+        <http://jonasn12.uia.io/ontology#hasRequirement>
+                <http://jonasn12.uia.io/ontology#Integrals> ;
+        <http://jonasn12.uia.io/ontology#hasSubtopic>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#isSubtopicOf>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#MA-154>
+        a       <http://jonasn12.uia.io/ontology#Courses> ;
+        <http://jonasn12.uia.io/ontology#hasTopic>
+                <http://jonasn12.uia.io/ontology#Integrals> .
+
+<http://jonasn12.uia.io/ontology#Learningtypes>
+        a       owl:Class .
+
+<http://jonasn12.uia.io/ontology#isRequirement>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#isPracticalPart>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#isTopicOf>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#hasSubtopic>
+        a       owl:ObjectProperty .
+
+<http://jonasn12.uia.io/ontology#Lecture>
+        a       <http://jonasn12.uia.io/ontology#Learningtypes> ;
+        <http://jonasn12.uia.io/ontology#isTheoreticalPart>
+                <http://jonasn12.uia.io/ontology#Algebra> .
+
+<http://jonasn12.uia.io/ontology#hasTheoreticalPart>
+        a       owl:ObjectProperty .
