@@ -52,6 +52,7 @@ public class GUI extends JFrame {
     List<String> dependantOn = new ArrayList<>();
     List<String> subtopics = new ArrayList<>();
     List<String> types = new ArrayList<>();
+    List<String> courseHasTopic = new ArrayList<>();
 
     OntModel model;
 
@@ -78,6 +79,7 @@ public class GUI extends JFrame {
 
         setTitle("Jonas' Amazing Ontology Program");
         setContentPane(rootPanel);
+        setResizable(false);
         pack();
         setVisible(true);
 
@@ -127,10 +129,11 @@ public class GUI extends JFrame {
         //Add some properties
         model.add(topics,hasSubtopic,advancedSubject);
         model.add(topics,hasSubtopic,baseSubject);
-        model.add(courses,hasTopic,mathCourse);
-        model.add(courses,hasTopic,programmingCourse);
         model.add(topics, hasPracticalPart, presentation);
         model.add(topics, hasTheoreticalPart, lecture);
+        model.add(courses,hasTopic,mathCourse);
+        model.add(courses,hasTopic,programmingCourse);
+
 
         //Set property values
         mathCourse.setPropertyValue(hasTopic, baseSubject);
@@ -147,11 +150,12 @@ public class GUI extends JFrame {
 
 
         //Populate the dropdown with predefined courses
-        populateDropDown(model, topics);
+        populateDropDown(model, topics, courses);
 
 
         createTopicButton.addActionListener(e -> {
             String resName = newTopic.getText();
+
             newResource = model.createIndividual(uri + resName, topics);
             model.add(topics, hasSubtopic, newResource);
 
@@ -182,13 +186,29 @@ public class GUI extends JFrame {
                     }
                 }
             }
-
-            populateDropDown(model, topics);
+            output.append("Added topic : " + resName + "\n");
+            populateDropDown(model, topics, courses);
 
             dependantOn.clear();
             subtopics.clear();
             types.clear();
 
+        });
+
+        saveCourseButton.addActionListener(e -> {
+            String cName = courseName.getText();
+            newResource = model.createIndividual(uri + cName, courses);
+            model.add(courses, hasTopic, newResource);
+
+            if(!courseHasTopic.isEmpty()){
+                for (String item : courseHasTopic) {
+                    newResource.setPropertyValue(hasTopic, model.getIndividual(item));
+                    model.getIndividual(item).setPropertyValue(hasTopic, newResource);
+                }
+            }
+            output.append("Added course : " + cName + "\n");
+            courseHasTopic.clear();
+            populateDropDown(model, topics, courses);
         });
 
         saveOntButton.addActionListener(e -> {
@@ -207,34 +227,43 @@ public class GUI extends JFrame {
             }
         });
 
+        addTopicButton.addActionListener(e -> {
+            String selected = courseTopicDrop.getSelectedItem().toString();
+            if(!selected.equals("None")){
+                courseHasTopic.add(selected);
+                output.append("Added topic : " + selected + "\n");
+            }
+        });
+
+
         addType.addActionListener(e -> {
             String selected = typeDrop.getSelectedItem().toString();
             if(!selected.equals("None")) {
                 types.add(selected);
-                output.append(" Added type : " + selected + "\n");
+                output.append("Added type : " + selected + "\n");
             }
         });
 
         addDepend.addActionListener(e -> {
             String selected = dependsDrop.getSelectedItem().toString();
-            if(!selected.equals("None")) {
+            if (!selected.equals("None")) {
                 dependantOn.add(selected);
-                output.append(" Added dependency : " + selected + "\n");
+                output.append("Added dependency : " + selected + "\n");
             }
         });
 
         addSub.addActionListener(e -> {
             String selected = subtopicOf.getSelectedItem().toString();
-            if(!selected.equals("None")) {
+            if (!selected.equals("None")) {
                 subtopics.add(selected);
-                output.append(" Added subtopic : " + selected + "\n");
+                output.append("Added subtopic : " + selected + "\n");
             }
         });
     }
 
-    public void populateDropDown(Model model, Resource topics) {
+    public void populateDropDown(Model model, Resource topics, Resource courses) {
 
-        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop};
+        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop};
 
         for(int i = 0; i < drops.length; i++){
             drops[i].removeAllItems();
@@ -259,6 +288,12 @@ public class GUI extends JFrame {
 
         typeDrop.addItem("Presentation");
         typeDrop.addItem("Lecture");
+
+        //courseTopicDrop.addItem("None");
+
+        resourceList.forEach(courseTopicDrop::addItem);
+
+
 
     }
 }
