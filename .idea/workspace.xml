@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825cfa80-a2e0-44c0-a81e-a61d2bc5b979" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="D:\Dropbox\Skole\msc\ikt437\task_03\source\out\production\437_3\GUI.class" afterPath="D:\Dropbox\Skole\msc\ikt437\task_03\source\out\production\437_3\GUI.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/437_3/GUI.class" afterPath="$PROJECT_DIR$/out/production/437_3/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI.form" afterPath="$PROJECT_DIR$/src/GUI.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI.java" afterPath="$PROJECT_DIR$/src/GUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ont.ttl" afterPath="$PROJECT_DIR$/ont.ttl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ikt437_mandatory_1.iws" />
@@ -42,14 +41,20 @@
       <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37242472">
-              <caret line="237" column="76" selection-start-line="237" selection-start-column="76" selection-end-line="237" selection-end-column="76" />
+            <state vertical-scroll-proportion="0.17591125">
+              <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#6521:8434" expanded="false" />
-                <element signature="class#8485:9284" expanded="false" />
-                <element signature="class#10771:12129" expanded="false" />
-                <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
+                <element signature="class#6824:8737" expanded="false" />
+                <element signature="class#8788:9587" expanded="false" />
+                <element signature="class#9635:11026" expanded="false" />
+                <element signature="class#11074:12432" expanded="false" />
+                <element signature="class#12481:12867" expanded="false" />
+                <element signature="class#12909:13279" expanded="false" />
+                <element signature="class#13323:13709" expanded="false" />
+                <element signature="class#13750:14131" expanded="false" />
+                <element signature="class#14184:14610" expanded="false" />
+                <element signature="class#14662:15083" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -428,12 +433,12 @@
       <workItem from="1446132763482" duration="2827000" />
       <workItem from="1446203805640" duration="5574000" />
       <workItem from="1446453105455" duration="2574000" />
-      <workItem from="1446477247937" duration="16796000" />
+      <workItem from="1446477247937" duration="18080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55104000" />
+    <option name="totallyTimeSpent" value="56388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -537,10 +542,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#6521:8434" expanded="false" />
-            <element signature="class#8485:9284" expanded="false" />
-            <element signature="class#10771:12129" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
+            <element signature="class#6824:8737" expanded="false" />
+            <element signature="class#8788:9587" expanded="false" />
+            <element signature="class#9635:11026" expanded="false" />
+            <element signature="class#11074:12432" expanded="false" />
+            <element signature="class#12481:12867" expanded="false" />
+            <element signature="class#12909:13279" expanded="false" />
+            <element signature="class#13323:13709" expanded="false" />
+            <element signature="class#13750:14131" expanded="false" />
+            <element signature="class#14184:14610" expanded="false" />
+            <element signature="class#14662:15083" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -572,10 +583,16 @@
           <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#6521:8434" expanded="false" />
-            <element signature="class#8485:9284" expanded="false" />
-            <element signature="class#10771:12129" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
+            <element signature="class#6824:8737" expanded="false" />
+            <element signature="class#8788:9587" expanded="false" />
+            <element signature="class#9635:11026" expanded="false" />
+            <element signature="class#11074:12432" expanded="false" />
+            <element signature="class#12481:12867" expanded="false" />
+            <element signature="class#12909:13279" expanded="false" />
+            <element signature="class#13323:13709" expanded="false" />
+            <element signature="class#13750:14131" expanded="false" />
+            <element signature="class#14184:14610" expanded="false" />
+            <element signature="class#14662:15083" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -610,10 +627,16 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#6521:8434" expanded="false" />
-            <element signature="class#8485:9284" expanded="false" />
-            <element signature="class#10771:12129" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
+            <element signature="class#6824:8737" expanded="false" />
+            <element signature="class#8788:9587" expanded="false" />
+            <element signature="class#9635:11026" expanded="false" />
+            <element signature="class#11074:12432" expanded="false" />
+            <element signature="class#12481:12867" expanded="false" />
+            <element signature="class#12909:13279" expanded="false" />
+            <element signature="class#13323:13709" expanded="false" />
+            <element signature="class#13750:14131" expanded="false" />
+            <element signature="class#14184:14610" expanded="false" />
+            <element signature="class#14662:15083" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -659,14 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_60/src.zip!/javax/swing/AbstractButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275864">
@@ -686,16 +701,30 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37242472">
-          <caret line="237" column="76" selection-start-line="237" selection-start-column="76" selection-end-line="237" selection-end-column="76" />
+        <state vertical-scroll-proportion="0.17591125">
+          <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#6521:8434" expanded="false" />
-            <element signature="class#8485:9284" expanded="false" />
-            <element signature="class#10771:12129" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
+            <element signature="class#6824:8737" expanded="false" />
+            <element signature="class#8788:9587" expanded="false" />
+            <element signature="class#9635:11026" expanded="false" />
+            <element signature="class#11074:12432" expanded="false" />
+            <element signature="class#12481:12867" expanded="false" />
+            <element signature="class#12909:13279" expanded="false" />
+            <element signature="class#13323:13709" expanded="false" />
+            <element signature="class#13750:14131" expanded="false" />
+            <element signature="class#14184:14610" expanded="false" />
+            <element signature="class#14662:15083" expanded="false" />
           </folding>
         </state>
       </provider>

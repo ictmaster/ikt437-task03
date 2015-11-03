@@ -34,6 +34,10 @@ public class GUI extends JFrame {
     private JButton addTopicButton;
     private JButton saveCourseButton;
     private JButton loadOntButton;
+    private JComboBox deleteCourseDrop;
+    private JButton deleteCourseButton;
+    private JComboBox deleteTopicDrop;
+    private JButton deleteTopicButton;
 
     //Some initialization
     ObjectProperty isSubtopicOf; //Topic is subtopic of Topic
@@ -63,6 +67,8 @@ public class GUI extends JFrame {
         //Workaround for annoying width-changing dropdowns
         dependsDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         subtopicOf.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        deleteCourseDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        deleteTopicDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
 
 
         //for(int i =0;i < UIManager.getInstalledLookAndFeels().length; i++)
@@ -327,11 +333,33 @@ public class GUI extends JFrame {
                 }
             }
         });
+
+        deleteCourseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String courseToDel = deleteCourseDrop.getSelectedItem().toString();
+                Individual i = model.getIndividual(courseToDel);
+                i.remove();
+                output.append("Removed course "+courseToDel+"...\n");
+                populateDropDown(model, topics, courses);
+            }
+        });
+
+        deleteTopicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String topicToDel = deleteTopicDrop.getSelectedItem().toString();
+                Individual i = model.getIndividual(topicToDel);
+                i.remove();
+                output.append("Removed topic "+topicToDel+"...\n");
+                populateDropDown(model, topics, courses);
+            }
+        });
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
 
-        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop};
+        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop, deleteCourseDrop, deleteTopicDrop};
 
         for(int i = 0; i < drops.length; i++){
             drops[i].removeAllItems();
@@ -352,6 +380,7 @@ public class GUI extends JFrame {
         for (String item : resourceList) {
             dependsDrop.addItem(item);
             subtopicOf.addItem(item);
+            deleteTopicDrop.addItem(item);
         }
 
         typeDrop.addItem("Presentation");
@@ -361,7 +390,13 @@ public class GUI extends JFrame {
 
         resourceList.forEach(courseTopicDrop::addItem);
 
+        NodeIterator allCourses = model.listObjectsOfProperty(courses, hasTopic);
+        resourceList.clear();
 
+        while(allCourses.hasNext()){
+            resourceList.add(allCourses.nextNode().toString());
+        }
 
+        resourceList.forEach(deleteCourseDrop::addItem);
     }
 }
