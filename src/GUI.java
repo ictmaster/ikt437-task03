@@ -146,17 +146,17 @@ public class GUI extends JFrame {
 
 
         //Set property values
-        mathCourse.setPropertyValue(hasTopic, baseSubject);
-        mathCourse.setPropertyValue(hasTopic, advancedSubject);
-        advancedSubject.setPropertyValue(hasRequirement, baseSubject);
-        advancedSubject.setPropertyValue(hasSubtopic, baseSubject);
-        baseSubject.setPropertyValue(isSubtopicOf, advancedSubject);
-        baseSubject.setPropertyValue(isRequirement, advancedSubject);
+        mathCourse.addProperty(hasTopic, baseSubject);
+        mathCourse.addProperty(hasTopic, advancedSubject);
+        advancedSubject.addProperty(hasRequirement, baseSubject);
+        advancedSubject.addProperty(hasSubtopic, baseSubject);
+        baseSubject.addProperty(isSubtopicOf, advancedSubject);
+        baseSubject.addProperty(isRequirement, advancedSubject);
 
-        presentation.setPropertyValue(isPracticalPart, advancedSubject);
-        advancedSubject.setPropertyValue(hasPracticalPart, presentation);
-        lecture.setPropertyValue(isTheoreticalPart, baseSubject);
-        baseSubject.setPropertyValue(hasTheoreticalPart, lecture);
+        presentation.addProperty(isPracticalPart, advancedSubject);
+        advancedSubject.addProperty(hasPracticalPart, presentation);
+        lecture.addProperty(isTheoreticalPart, baseSubject);
+        baseSubject.addProperty(hasTheoreticalPart, lecture);
 
         //Initial population of the dropdowns
         populateDropDown(model, topics, courses);
@@ -174,15 +174,15 @@ public class GUI extends JFrame {
 
                 if (!dependantOn.isEmpty()) {
                     for (String item : dependantOn) {
-                        newResource.setPropertyValue(hasRequirement, model.getIndividual(item));
-                        model.getIndividual(item).setPropertyValue(isRequirement, newResource);
+                        newResource.addProperty(hasRequirement, model.getIndividual(item));
+                        model.getIndividual(item).addProperty(isRequirement, newResource);
                     }
                 }
 
                 if (!subtopics.isEmpty()) {
                     for (String item : subtopics) {
-                        newResource.setPropertyValue(hasSubtopic, model.getIndividual(item));
-                        model.getIndividual(item).setPropertyValue(isSubtopicOf, newResource);
+                        newResource.addProperty(hasSubtopic, model.getIndividual(item));
+                        model.getIndividual(item).addProperty(isSubtopicOf, newResource);
                     }
                 }
 
@@ -190,12 +190,12 @@ public class GUI extends JFrame {
                     for (String item : types) {
 
                         if (item.equals("Presentation")) {
-                            newResource.setPropertyValue(hasPracticalPart, model.getIndividual(uri+item));
-                            model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+                            newResource.addProperty(hasPracticalPart, model.getIndividual(uri + item));
+                            model.getIndividual(uri + item).addProperty(isPracticalPart, newResource);
 
                         } else if (item.equals("Lecture")) {
-                            newResource.setPropertyValue(hasTheoreticalPart, model.getIndividual(uri+item));
-                            model.getIndividual(uri + item).setPropertyValue(hasPracticalPart, newResource);
+                            newResource.addProperty(hasTheoreticalPart, model.getIndividual(uri + item));
+                            model.getIndividual(uri + item).addProperty(isTheoreticalPart, newResource);
                         }
                     }
                 }
@@ -217,8 +217,8 @@ public class GUI extends JFrame {
 
                 if(!courseHasTopic.isEmpty()){
                     for (String item : courseHasTopic) {
-                        newResource.setPropertyValue(hasTopic, model.getIndividual(item));
-                        model.getIndividual(item).setPropertyValue(hasTopic, newResource);
+                        newResource.addProperty(hasTopic, model.getIndividual(item));
+                        model.getIndividual(item).addProperty(isTopicOf, newResource);
                     }
                 }
                 output.append("Added course : " + cName + "\n");
