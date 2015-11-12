@@ -14,6 +14,10 @@ public class Sparql {
         this.queryString = queryString;
     }
 
+    public void setNewQueryString(String queryString){
+        this.queryString = queryString;
+    }
+
     public String executeQuery(){
         return executeQuery(this.queryString);
     }
