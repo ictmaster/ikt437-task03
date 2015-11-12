@@ -1,9 +1,6 @@
-import org.apache.jena.query.ResultSet;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class ResultWindow extends JFrame {
     public ResultWindow(String title, String output){
@@ -16,12 +13,9 @@ public class ResultWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton closeBtn = new JButton("Close");
-        closeBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                dispose();
-            }
+        closeBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
         });
 
 

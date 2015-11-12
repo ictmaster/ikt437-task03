@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="825cfa80-a2e0-44c0-a81e-a61d2bc5b979" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI.java" afterPath="$PROJECT_DIR$/src/GUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ResultWindow.java" afterPath="$PROJECT_DIR$/src/ResultWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ikt437_mandatory_1.iws" />
@@ -25,7 +26,7 @@
     <favorites_list name="ikt437_mandatory_1" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.42963815">
       <split-first>
         <leaf>
           <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
@@ -41,36 +42,81 @@
           <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/GUI.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-17.48276">
-                  <caret line="114" column="23" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="23" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
                   <folding>
-                    <element signature="class#6744:8620" expanded="false" />
-                    <element signature="class#8671:9461" expanded="false" />
-                    <element signature="class#9509:10734" expanded="false" />
-                    <element signature="class#10782:12140" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-                    <element signature="class#12189:12575" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-                    <element signature="class#12617:12987" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-                    <element signature="class#13031:13417" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-                    <element signature="class#13458:13839" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-                    <element signature="class#13892:14318" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-                    <element signature="class#14370:14791" expanded="false" />
-                    <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+                    <element signature="class#5001:6949" expanded="false" />
+                    <element signature="class#7000:7814" expanded="false" />
+                    <element signature="class#8796:9182" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#8796:9182" expanded="false" />
+                    <element signature="class#9224:9594" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#9224:9594" expanded="false" />
+                    <element signature="class#9638:10024" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#9638:10024" expanded="false" />
+                    <element signature="class#10065:10446" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#10065:10446" expanded="false" />
+                    <element signature="class#10499:10925" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#10499:10925" expanded="false" />
+                    <element signature="class#10977:11398" expanded="false" />
+                    <element signature="method#actionPerformed#0;class#10977:11398" expanded="false" />
+                    <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ResultWindow.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="FileHandler.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/FileHandler.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.3411371">
+                  <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#289#290#0" expanded="true" />
+                    <element signature="e#332#333#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OntProp.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/OntProp.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#995#996#0" expanded="true" />
+                    <element signature="e#1051#1052#0" expanded="true" />
+                    <element signature="e#1088#1089#0" expanded="true" />
+                    <element signature="e#1122#1123#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OntologyProperties.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/OntologyProperties.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GUI.form" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/GUI.form">
+              <provider selected="true" editor-type-id="ui-designer">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ResultWindow.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ResultWindow.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.53067815">
-                  <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -96,15 +142,24 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Sparql.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Sparql.java">
+          <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/GUI.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.53067815">
-                  <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+                <state vertical-scroll-proportion="2.6789298">
+                  <caret line="271" column="0" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="0" />
                   <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#653#654#0" expanded="true" />
-                    <element signature="e#706#707#0" expanded="true" />
+                    <element signature="class#5001:6949" expanded="false" />
+                    <element signature="class#7000:7814" expanded="false" />
+                    <element signature="class#7862:8316" expanded="false" />
+                    <element signature="class#8364:8747" expanded="false" />
+                    <element signature="class#8796:9182" expanded="false" />
+                    <element signature="class#9224:9594" expanded="false" />
+                    <element signature="class#9638:10024" expanded="false" />
+                    <element signature="class#10065:10446" expanded="false" />
+                    <element signature="class#10499:10925" expanded="false" />
+                    <element signature="class#10977:11398" expanded="false" />
+                    <element signature="class#11445:11805" expanded="false" />
+                    <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -145,7 +200,11 @@
         <option value="$PROJECT_DIR$/src/GUI.form" />
         <option value="$PROJECT_DIR$/src/Sparql.java" />
         <option value="$PROJECT_DIR$/src/ResultWindow.java" />
+        <option value="$PROJECT_DIR$/src/OntologyProperties.java" />
+        <option value="$PROJECT_DIR$/src/OntologyGenerator.java" />
+        <option value="$PROJECT_DIR$/src/OntProp.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
+        <option value="$PROJECT_DIR$/src/FileHandler.java" />
       </list>
     </option>
   </component>
@@ -243,6 +302,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="175" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
@@ -703,12 +763,12 @@
       <workItem from="1447163490593" duration="70000" />
       <workItem from="1447242285024" duration="137000" />
       <workItem from="1447254685421" duration="1361000" />
-      <workItem from="1447256447059" duration="8188000" />
+      <workItem from="1447256447059" duration="12836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73012000" />
+    <option name="totallyTimeSpent" value="77660000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -722,7 +782,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34587252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34587252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33689204" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.09322917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -781,15 +841,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI.java</url>
-          <line>223</line>
-          <properties />
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="36" />
+      <option name="time" value="37" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -811,23 +863,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -853,23 +900,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="26" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="26" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -895,23 +937,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="26" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="26" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -937,23 +974,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="26" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="26" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -997,23 +1029,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="26" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="26" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1064,23 +1091,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1110,23 +1132,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="0" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1159,23 +1176,18 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1258,48 +1270,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.form">
+    <entry file="file://$PROJECT_DIR$/src/ResultWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.48276">
-          <caret line="114" column="23" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="23" />
           <folding>
-            <element signature="class#6744:8620" expanded="false" />
-            <element signature="class#8671:9461" expanded="false" />
-            <element signature="class#9509:10734" expanded="false" />
-            <element signature="class#10782:12140" expanded="false" />
-            <element signature="method#actionPerformed#0;class#10782:12140" expanded="false" />
-            <element signature="class#12189:12575" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12189:12575" expanded="false" />
-            <element signature="class#12617:12987" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12617:12987" expanded="false" />
-            <element signature="class#13031:13417" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13031:13417" expanded="false" />
-            <element signature="class#13458:13839" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13458:13839" expanded="false" />
-            <element signature="class#13892:14318" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13892:14318" expanded="false" />
-            <element signature="class#14370:14791" expanded="false" />
-            <element signature="method#actionPerformed#0;class#14370:14791" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1315,12 +1292,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ResultWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/OntologyProperties.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53067815">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.form">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OntProp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+            <element signature="e#1051#1052#0" expanded="true" />
+            <element signature="e#1088#1089#0" expanded="true" />
+            <element signature="e#1122#1123#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3411371">
+          <caret line="24" column="59" selection-start-line="24" selection-start-column="59" selection-end-line="24" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#289#290#0" expanded="true" />
+            <element signature="e#332#333#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.6789298">
+          <caret line="271" column="0" selection-start-line="271" selection-start-column="0" selection-end-line="271" selection-end-column="0" />
+          <folding>
+            <element signature="class#5001:6949" expanded="false" />
+            <element signature="class#7000:7814" expanded="false" />
+            <element signature="class#7862:8316" expanded="false" />
+            <element signature="class#8364:8747" expanded="false" />
+            <element signature="class#8796:9182" expanded="false" />
+            <element signature="class#9224:9594" expanded="false" />
+            <element signature="class#9638:10024" expanded="false" />
+            <element signature="class#10065:10446" expanded="false" />
+            <element signature="class#10499:10925" expanded="false" />
+            <element signature="class#10977:11398" expanded="false" />
+            <element signature="class#11445:11805" expanded="false" />
+            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
