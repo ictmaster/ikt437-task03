@@ -1,15 +1,12 @@
 import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.NodeIterator;
 import org.apache.jena.rdf.model.Resource;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,16 +36,11 @@ public class GUI extends JFrame {
     private JTextArea sparql;
     private JButton sparqlButton;
 
-
-
-
     Individual newResource;
     List<String> dependantOn = new ArrayList<>();
     List<String> subtopics = new ArrayList<>();
     List<String> types = new ArrayList<>();
     List<String> courseHasTopic = new ArrayList<>();
-
-    OntModel model;
 
     public GUI() {
         //Workaround for annoying width-changing dropdowns
@@ -79,72 +71,31 @@ public class GUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Create main ontology model
-        model = new OntProp().getUpdatedModel();
-
-        //Create classes
-        OntClass topics = model.createClass(OntologyProperties.URI + "Topics");
-        OntClass courses = model.createClass(OntologyProperties.URI + "Courses");
-        OntClass learningTypes = model.createClass(OntologyProperties.URI + "Learningtypes");
-
-        //Create some learning types
-        Individual presentation = model.createIndividual(OntologyProperties.URI + "Presentation", learningTypes);
-        Individual lecture = model.createIndividual(OntologyProperties.URI + "Lecture", learningTypes);
-
-        //Create some topics
-        Individual advancedSubject = model.createIndividual(OntologyProperties.URI + "Integrals", topics);
-        Individual baseSubject = model.createIndividual(OntologyProperties.URI + "Algebra", topics);
-
-        //Create some courses
-        Individual mathCourse = model.createIndividual(OntologyProperties.URI + "MA-154", courses);
-        Individual programmingCourse = model.createIndividual(OntologyProperties.URI + "DAT101", courses);
-
-        //Add some properties
-        model.add(topics,OntProp.hasSubtopic,advancedSubject);
-        model.add(topics,OntProp.hasSubtopic,baseSubject);
-        model.add(topics, OntProp.hasPracticalPart, presentation);
-        model.add(topics, OntProp.hasTheoreticalPart, lecture);
-        model.add(courses,OntProp.hasTopic,mathCourse);
-        model.add(courses,OntProp.hasTopic,programmingCourse);
-
-
-        //Set property values
-        mathCourse.addProperty(OntProp.hasTopic, baseSubject);
-        mathCourse.addProperty(OntProp.hasTopic, advancedSubject);
-        advancedSubject.addProperty(OntProp.hasRequirement, baseSubject);
-        advancedSubject.addProperty(OntProp.hasSubtopic, baseSubject);
-        baseSubject.addProperty(OntProp.isSubtopicOf, advancedSubject);
-        baseSubject.addProperty(OntProp.isRequirement, advancedSubject);
-
-        presentation.addProperty(OntProp.isPracticalPart, advancedSubject);
-        advancedSubject.addProperty(OntProp.hasPracticalPart, presentation);
-        lecture.addProperty(OntProp.isTheoreticalPart, baseSubject);
-        baseSubject.addProperty(OntProp.hasTheoreticalPart, lecture);
+        MyOntology mOnt = new MyOntology();
 
         //Initial population of the dropdowns
-        populateDropDown(model, topics, courses);
+        populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
 
-
-        //LISTENERS (not using lambdas cause of not collapsible in intellij)
-
+        //LISTENERS
         createTopicButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String resName = newTopic.getText();
 
-                newResource = model.createIndividual(OntologyProperties.URI + resName, topics);
-                model.add(topics, OntProp.hasSubtopic, newResource);
+                newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + resName, mOnt.getTopics());
+                mOnt.getModel().add(mOnt.getTopics(), MyOntology.hasSubtopic, newResource);
 
                 if (!dependantOn.isEmpty()) {
                     for (String item : dependantOn) {
-                        newResource.addProperty(OntProp.hasRequirement, model.getIndividual(item));
-                        model.getIndividual(item).addProperty(OntProp.isRequirement, newResource);
+                        newResource.addProperty(MyOntology.hasRequirement, mOnt.getModel().getIndividual(item));
+                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isRequirement, newResource);
                     }
                 }
 
                 if (!subtopics.isEmpty()) {
                     for (String item : subtopics) {
-                        newResource.addProperty(OntProp.hasSubtopic, model.getIndividual(item));
-                        model.getIndividual(item).addProperty(OntProp.isSubtopicOf, newResource);
+                        newResource.addProperty(MyOntology.hasSubtopic, mOnt.getModel().getIndividual(item));
+                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isSubtopicOf, newResource);
                     }
                 }
 
@@ -152,17 +103,17 @@ public class GUI extends JFrame {
                     for (String item : types) {
 
                         if (item.equals("Presentation")) {
-                            newResource.addProperty(OntProp.hasPracticalPart, model.getIndividual(OntologyProperties.URI + item));
-                            model.getIndividual(OntologyProperties.URI + item).addProperty(OntProp.isPracticalPart, newResource);
+                            newResource.addProperty(MyOntology.hasPracticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
+                            mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isPracticalPart, newResource);
 
                         } else if (item.equals("Lecture")) {
-                            newResource.addProperty(OntProp.hasTheoreticalPart, model.getIndividual(OntologyProperties.URI + item));
-                            model.getIndividual(OntologyProperties.URI + item).addProperty(OntProp.isTheoreticalPart, newResource);
+                            newResource.addProperty(MyOntology.hasTheoreticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
+                            mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isTheoreticalPart, newResource);
                         }
                     }
                 }
                 output.append("Added topic : " + resName + "\n");
-                populateDropDown(model, topics, courses);
+                populateDropDown(mOnt.getModel(),mOnt.getTopics(), mOnt.getCourses());
 
                 dependantOn.clear();
                 subtopics.clear();
@@ -174,27 +125,27 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cName = courseName.getText();
-                newResource = model.createIndividual(OntologyProperties.URI + cName, courses);
-                model.add(courses, OntProp.hasTopic, newResource);
+                newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + cName, mOnt.getCourses());
+                mOnt.getModel().add(mOnt.getCourses(), MyOntology.hasTopic, newResource);
 
                 if(!courseHasTopic.isEmpty()){
                     for (String item : courseHasTopic) {
-                        newResource.addProperty(OntProp.hasTopic, model.getIndividual(item));
-                        model.getIndividual(item).addProperty(OntProp.isTopicOf, newResource);
+                        newResource.addProperty(MyOntology.hasTopic, mOnt.getModel().getIndividual(item));
+                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isTopicOf, newResource);
                     }
                 }
                 output.append("Added course : " + cName + "\n");
                 courseHasTopic.clear();
-                populateDropDown(model, topics, courses);
+                populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
             }
         });
 
         loadOntButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (FileHandler.importModel(model)) {
+                if (FileHandler.importModel(mOnt.getModel())) {
                     output.append("Loaded ontology from file '" + FileHandler.getFilename() + "'...\n");
-                    populateDropDown(model, topics, courses);
+                    populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
                 } else {
                     output.append("Loading ontology canceled...\n");
                 }
@@ -204,7 +155,7 @@ public class GUI extends JFrame {
         saveOntButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(FileHandler.exportModel(model)){
+                if(FileHandler.exportModel(mOnt.getModel())){
                     output.append("Wrote ontology to file '"+FileHandler.getFilename()+"'...\n");
                 } else {
                     output.append("Writing ontology canceled...\n");
@@ -260,10 +211,10 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String courseToDel = deleteCourseDrop.getSelectedItem().toString();
-                Individual i = model.getIndividual(courseToDel);
+                Individual i = mOnt.getModel().getIndividual(courseToDel);
                 i.remove();
                 output.append("Removed course "+courseToDel+"...\n");
-                populateDropDown(model, topics, courses);
+                populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
             }
         });
 
@@ -271,10 +222,10 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String topicToDel = deleteTopicDrop.getSelectedItem().toString();
-                Individual i = model.getIndividual(topicToDel);
+                Individual i = mOnt.getModel().getIndividual(topicToDel);
                 i.remove();
                 output.append("Removed topic "+topicToDel+"...\n");
-                populateDropDown(model, topics, courses);
+                populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getTopics());
             }
         });
 
@@ -282,7 +233,7 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String resultString = new Sparql(model, sparql.getText()).executeQuery();
+                String resultString = new Sparql(mOnt.getModel(), sparql.getText()).executeQuery();
                 output.append("Query processed, opening result window...");
                 new ResultWindow("SPARQL Query Results", resultString);
             }
@@ -298,7 +249,7 @@ public class GUI extends JFrame {
             drops[i].validate();
             drops[i].addItem("None");
         }
-        NodeIterator allTopics = model.listObjectsOfProperty(topics, OntProp.hasSubtopic);
+        NodeIterator allTopics = model.listObjectsOfProperty(topics, MyOntology.hasSubtopic);
         List<String> resourceList = new ArrayList<>();
 
         while (allTopics.hasNext()) {
@@ -316,7 +267,7 @@ public class GUI extends JFrame {
 
         resourceList.forEach(courseTopicDrop::addItem);
 
-        NodeIterator allCourses = model.listObjectsOfProperty(courses, OntProp.hasTopic);
+        NodeIterator allCourses = model.listObjectsOfProperty(courses, MyOntology.hasTopic);
         resourceList.clear();
 
         while(allCourses.hasNext()){

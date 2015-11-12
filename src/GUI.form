@@ -310,6 +310,14 @@
               </scrollpane>
             </children>
           </grid>
+          <grid id="c432b" layout-manager="GridBagLayout">
+            <constraints>
+              <tabbedpane title="Study  Plan"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
         </children>
       </tabbedpane>
       <scrollpane id="fdd24" binding="outputScroller">
