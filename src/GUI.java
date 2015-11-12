@@ -354,31 +354,10 @@ public class GUI extends JFrame {
         sparqlButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String prefixes = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" +
-                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" +
-                        "PREFIX jonas: <http://jonasn12.uia.io/ontology#>";
 
-                String queryString = sparql.getText();
-                Query query = QueryFactory.create(prefixes+queryString);
-                QueryExecution execution = QueryExecutionFactory.create(query, model);
-                ResultSet result = execution.execSelect();
-
-                String resultString = ResultSetFormatter.asText(result);
-
-                output.append(resultString);
-
-                JTextArea results = new JTextArea(resultString);
-                JFrame displayStuff = new JFrame();
-                JScrollPane jsp = new JScrollPane(results);
-
-                displayStuff.setTitle("SPARQL Query Results");
-                displayStuff.setExtendedState(displayStuff.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-                displayStuff.setVisible(true);
-                displayStuff.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                displayStuff.add(jsp);
+                String resultString = new Sparql(model, sparql.getText()).executeQuery();
+                output.append("Query processed, opening result window...");
+                new ResultWindow("SPARQL Query Results", resultString);
             }
         });
 
@@ -412,8 +391,6 @@ public class GUI extends JFrame {
 
         typeDrop.addItem("Presentation");
         typeDrop.addItem("Lecture");
-
-        //courseTopicDrop.addItem("None");
 
         resourceList.forEach(courseTopicDrop::addItem);
 
