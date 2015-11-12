@@ -293,21 +293,16 @@ public class GUI extends JFrame {
     public void populateDropDown(Model model, Resource topics, Resource courses) {
 
         JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop, deleteCourseDrop, deleteTopicDrop};
-
         for(int i = 0; i < drops.length; i++){
             drops[i].removeAllItems();
             drops[i].validate();
+            drops[i].addItem("None");
         }
-
         NodeIterator allTopics = model.listObjectsOfProperty(topics, OntProp.hasSubtopic);
         List<String> resourceList = new ArrayList<>();
 
         while (allTopics.hasNext()) {
             resourceList.add(allTopics.nextNode().toString());
-        }
-
-        for(int i = 0; i < drops.length; i++){
-            drops[i].addItem("None");
         }
 
         for (String item : resourceList) {

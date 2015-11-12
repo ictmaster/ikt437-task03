@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825cfa80-a2e0-44c0-a81e-a61d2bc5b979" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/437_3/GUI.class" afterPath="$PROJECT_DIR$/out/production/437_3/GUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI.java" afterPath="$PROJECT_DIR$/src/GUI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -36,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6638796">
-              <caret line="126" column="43" selection-start-line="126" selection-start-column="43" selection-end-line="126" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="312" column="0" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
               <folding>
                 <element signature="class#5114:7157" expanded="false" />
                 <element signature="class#9023:9409" expanded="false" />
@@ -55,7 +56,6 @@
                 <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
                 <element signature="class#11204:11625" expanded="false" />
                 <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-                <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/src/OntProp.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#995#996#0" expanded="true" />
@@ -87,7 +87,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUI.form" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GUI.form" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
@@ -217,6 +217,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -716,12 +734,12 @@
       <workItem from="1447163490593" duration="70000" />
       <workItem from="1447242285024" duration="137000" />
       <workItem from="1447254685421" duration="1361000" />
-      <workItem from="1447256447059" duration="13095000" />
+      <workItem from="1447256447059" duration="14949000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77919000" />
+    <option name="totallyTimeSpent" value="79773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -735,7 +753,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34587252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34587252" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33689204" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13854167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -829,7 +847,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,7 +885,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -907,7 +923,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -946,7 +961,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1003,7 +1017,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1067,7 +1080,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1110,7 +1122,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1156,7 +1167,6 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1261,17 +1271,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.form">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FileHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.909699">
@@ -1284,10 +1283,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/OntologyProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/OntProp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#995#996#0" expanded="true" />
@@ -1306,18 +1313,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OntologyProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6638796">
-          <caret line="126" column="43" selection-start-line="126" selection-start-column="43" selection-end-line="126" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="312" column="0" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
           <folding>
             <element signature="class#5114:7157" expanded="false" />
             <element signature="class#9023:9409" expanded="false" />
@@ -1332,9 +1331,19 @@
             <element signature="method#actionPerformed#0;class#10726:11152" expanded="false" />
             <element signature="class#11204:11625" expanded="false" />
             <element signature="method#actionPerformed#0;class#11204:11625" expanded="false" />
-            <element signature="method#populateDropDown#0;class#GUI#0" expanded="false" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.form">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
   </component>
