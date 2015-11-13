@@ -88,7 +88,7 @@ public class GUI extends JFrame {
         MyOntology mOnt = new MyOntology();
 
         //Create studyplan object and send in output for console capabilities
-        StudyPlan studyPlan = new StudyPlan(output);
+        StudyPlan studyPlan = new StudyPlan(output, mOnt);
 
         //Initial population of the dropdowns
         populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
@@ -137,6 +137,7 @@ public class GUI extends JFrame {
             types.clear();
         });
 
+
         saveCourseButton.addActionListener(e -> {
             String cName = courseName.getText();
             newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + cName, mOnt.getCourses());
@@ -153,6 +154,7 @@ public class GUI extends JFrame {
             populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
         });
 
+        //Saving and loading from file
         loadOntButton.addActionListener(e -> {
             if (FileHandler.importModel(mOnt.getModel())) {
                 output.append("Loaded ontology from file '" + FileHandler.getFilename() + "'...\n");
@@ -189,15 +191,11 @@ public class GUI extends JFrame {
                 output.append("Query failed...\n");
             }
         });
-
-        spTopicAddButton.addActionListener(e -> {
-            String selected = spTopics.getSelectedItem().toString();
-            if(!selected.equals("None")){
-                studyPlan.addTopic(selected);
-                studyPlan.updateOptions(spAction, spSelectedTopics, spSelectedCourses);
-                output.append("Added topic: " + selected + "to studyplan\n");
-            }
-        });
+        studyPlan.updateDropdowns(spSelectedTopics, spSelectedCourses, spAction);
+        spTopicAddButton.addActionListener(e -> studyPlan.addTopic(spTopics.getSelectedItem().toString()));
+        spCourseAddButton.addActionListener(e -> studyPlan.addCourse(spCourses.getSelectedItem().toString()));
+        spDeleteTopicButton.addActionListener(e -> studyPlan.deleteTopic(spSelectedTopics.getSelectedItem().toString()));
+        spDeleteCoursesButton.addActionListener(e -> studyPlan.deleteCourse(spSelectedCourses.getSelectedItem().toString()));
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
