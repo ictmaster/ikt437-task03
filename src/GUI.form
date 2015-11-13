@@ -301,7 +301,7 @@
                       <editable value="true"/>
                       <enabled value="true"/>
                       <minimumSize width="450" height="160"/>
-                      <preferredSize width="450" height="170"/>
+                      <preferredSize width="495" height="250"/>
                       <rows value="10"/>
                       <text value="SELECT DISTINCT * WHERE { &#9;?subject ?property ?object }"/>
                     </properties>
@@ -312,7 +312,7 @@
           </grid>
           <grid id="c432b" layout-manager="GridBagLayout">
             <constraints>
-              <tabbedpane title="Study  Plan"/>
+              <tabbedpane title="Study Plan"/>
             </constraints>
             <properties/>
             <border type="none"/>

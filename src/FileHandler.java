@@ -30,11 +30,23 @@ public class FileHandler {
             }
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
+            return false;
         } catch (IOException e1) {
             e1.printStackTrace();
+            return false;
         }
-        return false;
     }
+
+    public static boolean importModel(OntModel model, String filename){
+        try{
+            model.read(new FileInputStream(filename), null, "TTL");
+            return true;
+        }catch(FileNotFoundException e1){
+            return false;
+        }
+    }
+
+
 
     public static boolean exportModel(OntModel model){
         FileWriter out = null;
@@ -57,6 +69,7 @@ public class FileHandler {
             }
         } catch (IOException w) {
             w.printStackTrace();
+            return false;
         } finally {
             if (out != null) {
                 try {
@@ -65,6 +78,5 @@ public class FileHandler {
                 }
             }
         }
-        return false;
     }
 }
