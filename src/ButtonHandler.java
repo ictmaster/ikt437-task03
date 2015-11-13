@@ -13,11 +13,6 @@ public class ButtonHandler implements ActionListener {
     private JTextArea output;
     private ButtonAction action;
 
-    public enum ButtonAction{
-        ADD,
-        DELETE
-    }
-
     public ButtonHandler(JComboBox select, JTextArea output, ButtonAction action){
         this.select = select;
         this.output = output;
@@ -50,5 +45,10 @@ public class ButtonHandler implements ActionListener {
             output.append("Removed "+selected+"...\n");
             gui.populateDropDown(ontology.getModel(), ontology.getTopics(), ontology.getCourses());
         }
+    }
+
+    public enum ButtonAction{
+        ADD,
+        DELETE
     }
 }

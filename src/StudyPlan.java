@@ -1,9 +1,4 @@
-import org.apache.jena.ontology.Individual;
-import org.apache.jena.rdf.model.Resource;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +7,9 @@ public class StudyPlan{
     private List<String> courses;
     private JTextArea output;
     private MyOntology ontology;
+    private JComboBox spAction;
+    private JComboBox selTopics;
+    private JComboBox selCourses;
 
     public StudyPlan(JTextArea output, MyOntology ontology){
         this();
@@ -56,8 +54,7 @@ public class StudyPlan{
         updateOptions(this.spAction, this.selTopics, this.selCourses);
     }
 
-
-     private void updateOptions(JComboBox types, JComboBox selectedTopics, JComboBox selectedCourses){
+    private void updateOptions(JComboBox types, JComboBox selectedTopics, JComboBox selectedCourses){
         JComboBox[] drops = {types, selectedTopics, selectedCourses};
         for(int i = 0; i < drops.length; i++){
             drops[i].removeAllItems();
@@ -65,11 +62,21 @@ public class StudyPlan{
         }
         topics.forEach(selectedTopics::addItem);
         courses.forEach(selectedCourses::addItem);
+
+        //TODO: fill out all PLAN_TYPES
+        if(topics.size() == 1 && courses.size() == 0){
+
+        }
+
     }
 
-    private JComboBox spAction;
-    private JComboBox selTopics;
-    private JComboBox selCourses;
+    private enum PLAN_TYPE{
+        COURSES_WITH_TOPIC,                 //case1 - 1 , 0
+        PREREQUICITES_OF_COURSES_TOPICS,    //case2 - 0 , 1
+        COURSE_PREREQUICTES_FOR_COURSE,     //case3 - 0 , 1
+        TOPICS_IN_COURSES,                  //case4 - 0 , 1+
+        SUBTOPICS_OF_TOPIC                  //case5 - 2+, 0 // make first one 'main' topic
+    }
 
     public void updateDropdowns(JComboBox selTopics, JComboBox selCourses, JComboBox action){
         this.selCourses = selCourses;
