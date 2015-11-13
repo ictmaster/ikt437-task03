@@ -1,5 +1,6 @@
 import org.apache.jena.ontology.Individual;
 import org.apache.jena.ontology.OntModel;
+import org.apache.jena.query.QueryParseException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.NodeIterator;
 import org.apache.jena.rdf.model.Resource;
@@ -35,6 +36,20 @@ public class GUI extends JFrame {
     private JButton deleteTopicButton;
     private JTextArea sparql;
     private JButton sparqlButton;
+    private JComboBox spTopics;
+    private JComboBox spCourses;
+    private JLabel spLabTopics;
+    private JLabel spLabCourses;
+    private JComboBox spAction;
+    private JLabel spLabAction;
+    private JButton spTopicAddButton;
+    private JButton spCourseAddButton;
+    private JButton spGetInfoButton;
+    private JComboBox spSelectedTopics;
+    private JLabel spLabSelectedTopics;
+    private JButton spDeleteTopicButton;
+    private JComboBox spSelectedCourses;
+    private JButton spDeleteCoursesButton;
 
     Individual newResource;
     List<String> dependantOn = new ArrayList<>();
@@ -42,12 +57,15 @@ public class GUI extends JFrame {
     List<String> types = new ArrayList<>();
     List<String> courseHasTopic = new ArrayList<>();
 
+
     public GUI() {
         //Workaround for annoying width-changing dropdowns
         dependsDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         subtopicOf.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         deleteCourseDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
         deleteTopicDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        spTopics.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        spCourses.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
 
         //Looks cooler :)
         try {
@@ -73,8 +91,13 @@ public class GUI extends JFrame {
         // Create main ontology model
         MyOntology mOnt = new MyOntology();
 
+        StudyPlan studyPlan = new StudyPlan();
+
         //Initial population of the dropdowns
         populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
+
+        //Sparql prefixes as tooltip
+        sparql.setToolTipText("<html>"+OntologyProperties.SparqlPrefixes.replaceAll("\n", "<br/>")+"</html>");
 
         //LISTENERS
         createTopicButton.addActionListener(new ActionListener() {
@@ -233,17 +256,34 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String resultString = new Sparql(mOnt.getModel(), sparql.getText()).executeQuery();
-                output.append("Query processed, opening result window...");
-                new ResultWindow("SPARQL Query Results", resultString);
+                String resultString;
+                try {
+                    resultString = new Sparql(mOnt.getModel(), sparql.getText()).executeQuery();
+                    output.append("Query processed, opening result window...\n");
+                    new ResultWindow("SPARQL Query Results", resultString);
+                } catch(QueryParseException ex) {
+                    ex.printStackTrace();
+                    output.append("Query failed...\n");
+                }
             }
         });
 
+        spTopicAddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = spTopics.getSelectedItem().toString();
+                if(!selected.equals("None")){
+                    studyPlan.addTopic(selected);
+                    studyPlan.updateOptions(spAction, spSelectedTopics, spSelectedCourses);
+                    output.append("Added topic: " + selected + "to studyplan\n");
+                }
+            }
+        });
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
 
-        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop, deleteCourseDrop, deleteTopicDrop};
+        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop, deleteCourseDrop, deleteTopicDrop, spTopics, spCourses};
         for(int i = 0; i < drops.length; i++){
             drops[i].removeAllItems();
             drops[i].validate();
@@ -256,16 +296,17 @@ public class GUI extends JFrame {
             resourceList.add(allTopics.nextNode().toString());
         }
 
+        //Topics
         for (String item : resourceList) {
             dependsDrop.addItem(item);
             subtopicOf.addItem(item);
             deleteTopicDrop.addItem(item);
+            courseTopicDrop.addItem(item);
+            spTopics.addItem(item);
         }
 
         typeDrop.addItem("Presentation");
         typeDrop.addItem("Lecture");
-
-        resourceList.forEach(courseTopicDrop::addItem);
 
         NodeIterator allCourses = model.listObjectsOfProperty(courses, MyOntology.hasTopic);
         resourceList.clear();
@@ -273,7 +314,12 @@ public class GUI extends JFrame {
         while(allCourses.hasNext()){
             resourceList.add(allCourses.nextNode().toString());
         }
+        //Courses
+        for (String item : resourceList){
+            deleteCourseDrop.addItem(item);
+            spCourses.addItem(item);
+        }
 
-        resourceList.forEach(deleteCourseDrop::addItem);
+
     }
 }

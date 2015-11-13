@@ -1,3 +1,5 @@
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,12 +7,15 @@ import java.awt.*;
 public class ResultWindow extends JFrame {
     public ResultWindow(String title, String output){
         JTextArea results = new JTextArea(output);
+        results.setEditable(false);
         JScrollPane jsp = new JScrollPane(results);
         this.setLayout(new BorderLayout());
         this.setTitle(title);
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
+
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JButton closeBtn = new JButton("Close");
         closeBtn.addActionListener(e -> {
