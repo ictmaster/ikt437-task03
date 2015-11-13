@@ -1,10 +1,18 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudyPlan {
+public class StudyPlan implements ActionListener{
     private List<String> topics;
     private List<String> courses;
+    private JTextArea output;
+
+    public StudyPlan(JTextArea output){
+        this();
+        this.output = output;
+    }
 
     public StudyPlan(){
         topics = new ArrayList<>();
@@ -50,5 +58,9 @@ public class StudyPlan {
     public void coursesWithTopic(MyOntology ont){
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
 

@@ -1,5 +1,4 @@
 import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.QueryParseException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.NodeIterator;
@@ -59,13 +58,10 @@ public class GUI extends JFrame {
 
 
     public GUI() {
-        //Workaround for annoying width-changing dropdowns
-        dependsDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-        subtopicOf.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-        deleteCourseDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-        deleteTopicDrop.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-        spTopics.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
-        spCourses.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        JComboBox[] drops = {dependsDrop, subtopicOf, typeDrop, courseTopicDrop, deleteCourseDrop, deleteTopicDrop, spTopics, spCourses};
+        for(int i = 0; i < drops.length; i++) {
+            drops[i].setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXX");
+        }
 
         //Looks cooler :)
         try {
@@ -91,7 +87,8 @@ public class GUI extends JFrame {
         // Create main ontology model
         MyOntology mOnt = new MyOntology();
 
-        StudyPlan studyPlan = new StudyPlan();
+        //Create studyplan object and send in output for console capabilities
+        StudyPlan studyPlan = new StudyPlan(output);
 
         //Initial population of the dropdowns
         populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
@@ -99,184 +96,106 @@ public class GUI extends JFrame {
         //Sparql prefixes as tooltip
         sparql.setToolTipText("<html>"+OntologyProperties.SparqlPrefixes.replaceAll("\n", "<br/>")+"</html>");
 
-        //LISTENERS
-        createTopicButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String resName = newTopic.getText();
+        createTopicButton.addActionListener(e -> {
+            String resName = newTopic.getText();
 
-                newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + resName, mOnt.getTopics());
-                mOnt.getModel().add(mOnt.getTopics(), MyOntology.hasSubtopic, newResource);
+            newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + resName, mOnt.getTopics());
+            mOnt.getModel().add(mOnt.getTopics(), MyOntology.hasSubtopic, newResource);
 
-                if (!dependantOn.isEmpty()) {
-                    for (String item : dependantOn) {
-                        newResource.addProperty(MyOntology.hasRequirement, mOnt.getModel().getIndividual(item));
-                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isRequirement, newResource);
-                    }
+            if (!dependantOn.isEmpty()) {
+                for (String item : dependantOn) {
+                    newResource.addProperty(MyOntology.hasRequirement, mOnt.getModel().getIndividual(item));
+                    mOnt.getModel().getIndividual(item).addProperty(MyOntology.isRequirement, newResource);
                 }
-
-                if (!subtopics.isEmpty()) {
-                    for (String item : subtopics) {
-                        newResource.addProperty(MyOntology.hasSubtopic, mOnt.getModel().getIndividual(item));
-                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isSubtopicOf, newResource);
-                    }
-                }
-
-                if (!types.isEmpty()) {
-                    for (String item : types) {
-
-                        if (item.equals("Presentation")) {
-                            newResource.addProperty(MyOntology.hasPracticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
-                            mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isPracticalPart, newResource);
-
-                        } else if (item.equals("Lecture")) {
-                            newResource.addProperty(MyOntology.hasTheoreticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
-                            mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isTheoreticalPart, newResource);
-                        }
-                    }
-                }
-                output.append("Added topic : " + resName + "\n");
-                populateDropDown(mOnt.getModel(),mOnt.getTopics(), mOnt.getCourses());
-
-                dependantOn.clear();
-                subtopics.clear();
-                types.clear();
             }
+
+            if (!subtopics.isEmpty()) {
+                for (String item : subtopics) {
+                    newResource.addProperty(MyOntology.hasSubtopic, mOnt.getModel().getIndividual(item));
+                    mOnt.getModel().getIndividual(item).addProperty(MyOntology.isSubtopicOf, newResource);
+                }
+            }
+
+            if (!types.isEmpty()) {
+                for (String item : types) {
+
+                    if (item.equals("Presentation")) {
+                        newResource.addProperty(MyOntology.hasPracticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
+                        mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isPracticalPart, newResource);
+
+                    } else if (item.equals("Lecture")) {
+                        newResource.addProperty(MyOntology.hasTheoreticalPart, mOnt.getModel().getIndividual(OntologyProperties.URI + item));
+                        mOnt.getModel().getIndividual(OntologyProperties.URI + item).addProperty(MyOntology.isTheoreticalPart, newResource);
+                    }
+                }
+            }
+            output.append("Added topic : " + resName + "\n");
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(), mOnt.getCourses());
+
+            dependantOn.clear();
+            subtopics.clear();
+            types.clear();
         });
 
-        saveCourseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cName = courseName.getText();
-                newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + cName, mOnt.getCourses());
-                mOnt.getModel().add(mOnt.getCourses(), MyOntology.hasTopic, newResource);
+        saveCourseButton.addActionListener(e -> {
+            String cName = courseName.getText();
+            newResource = mOnt.getModel().createIndividual(OntologyProperties.URI + cName, mOnt.getCourses());
+            mOnt.getModel().add(mOnt.getCourses(), MyOntology.hasTopic, newResource);
 
-                if(!courseHasTopic.isEmpty()){
-                    for (String item : courseHasTopic) {
-                        newResource.addProperty(MyOntology.hasTopic, mOnt.getModel().getIndividual(item));
-                        mOnt.getModel().getIndividual(item).addProperty(MyOntology.isTopicOf, newResource);
-                    }
+            if(!courseHasTopic.isEmpty()){
+                for (String item : courseHasTopic) {
+                    newResource.addProperty(MyOntology.hasTopic, mOnt.getModel().getIndividual(item));
+                    mOnt.getModel().getIndividual(item).addProperty(MyOntology.isTopicOf, newResource);
                 }
-                output.append("Added course : " + cName + "\n");
-                courseHasTopic.clear();
+            }
+            output.append("Added course : " + cName + "\n");
+            courseHasTopic.clear();
+            populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
+        });
+
+        loadOntButton.addActionListener(e -> {
+            if (FileHandler.importModel(mOnt.getModel())) {
+                output.append("Loaded ontology from file '" + FileHandler.getFilename() + "'...\n");
                 populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
+            } else {
+                output.append("Loading ontology canceled...\n");
             }
         });
 
-        loadOntButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (FileHandler.importModel(mOnt.getModel())) {
-                    output.append("Loaded ontology from file '" + FileHandler.getFilename() + "'...\n");
-                    populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
-                } else {
-                    output.append("Loading ontology canceled...\n");
-                }
+        saveOntButton.addActionListener(e -> {
+            if(FileHandler.exportModel(mOnt.getModel())){
+                output.append("Wrote ontology to file '"+FileHandler.getFilename()+"'...\n");
+            } else {
+                output.append("Writing ontology canceled...\n");
             }
         });
 
-        saveOntButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(FileHandler.exportModel(mOnt.getModel())){
-                    output.append("Wrote ontology to file '"+FileHandler.getFilename()+"'...\n");
-                } else {
-                    output.append("Writing ontology canceled...\n");
-                }
+        addTopicButton.addActionListener(new ButtonHandler(courseTopicDrop, courseHasTopic, output, ButtonHandler.ButtonAction.ADD));
+        addType.addActionListener(new ButtonHandler(typeDrop, types, output, ButtonHandler.ButtonAction.ADD));
+        addDepend.addActionListener(new ButtonHandler(dependsDrop, dependantOn, output, ButtonHandler.ButtonAction.ADD));
+        addSub.addActionListener(new ButtonHandler(subtopicOf, subtopics, output, ButtonHandler.ButtonAction.ADD));
+
+        deleteCourseButton.addActionListener(new ButtonHandler(deleteCourseDrop,mOnt,output,this, ButtonHandler.ButtonAction.DELETE));
+        deleteTopicButton.addActionListener(new ButtonHandler(deleteTopicDrop,mOnt,output,this, ButtonHandler.ButtonAction.DELETE));
+
+        sparqlButton.addActionListener(e -> {
+            String resultString;
+            try {
+                resultString = new Sparql(mOnt.getModel(), sparql.getText()).executeQuery();
+                output.append("Query processed, opening result window...\n");
+                new ResultWindow("SPARQL Query Results", resultString);
+            } catch(QueryParseException ex) {
+                ex.printStackTrace();
+                output.append("Query failed...\n");
             }
         });
 
-        addTopicButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = courseTopicDrop.getSelectedItem().toString();
-                if(!selected.equals("None")){
-                    courseHasTopic.add(selected);
-                    output.append("Added topic : " + selected + "\n");
-                }
-            }
-        });
-
-        addType.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = typeDrop.getSelectedItem().toString();
-                if(!selected.equals("None")) {
-                    types.add(selected);
-                    output.append("Added type : " + selected + "\n");
-                }
-            }
-        });
-
-        addDepend.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = dependsDrop.getSelectedItem().toString();
-                if (!selected.equals("None")) {
-                    dependantOn.add(selected);
-                    output.append("Added dependency : " + selected + "\n");
-                }
-            }
-        });
-
-        addSub.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = subtopicOf.getSelectedItem().toString();
-                if (!selected.equals("None")) {
-                    subtopics.add(selected);
-                    output.append("Added subtopic : " + selected + "\n");
-                }
-            }
-        });
-
-        deleteCourseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String courseToDel = deleteCourseDrop.getSelectedItem().toString();
-                Individual i = mOnt.getModel().getIndividual(courseToDel);
-                i.remove();
-                output.append("Removed course "+courseToDel+"...\n");
-                populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
-            }
-        });
-
-        deleteTopicButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String topicToDel = deleteTopicDrop.getSelectedItem().toString();
-                Individual i = mOnt.getModel().getIndividual(topicToDel);
-                i.remove();
-                output.append("Removed topic "+topicToDel+"...\n");
-                populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getTopics());
-            }
-        });
-
-        sparqlButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                String resultString;
-                try {
-                    resultString = new Sparql(mOnt.getModel(), sparql.getText()).executeQuery();
-                    output.append("Query processed, opening result window...\n");
-                    new ResultWindow("SPARQL Query Results", resultString);
-                } catch(QueryParseException ex) {
-                    ex.printStackTrace();
-                    output.append("Query failed...\n");
-                }
-            }
-        });
-
-        spTopicAddButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = spTopics.getSelectedItem().toString();
-                if(!selected.equals("None")){
-                    studyPlan.addTopic(selected);
-                    studyPlan.updateOptions(spAction, spSelectedTopics, spSelectedCourses);
-                    output.append("Added topic: " + selected + "to studyplan\n");
-                }
+        spTopicAddButton.addActionListener(e -> {
+            String selected = spTopics.getSelectedItem().toString();
+            if(!selected.equals("None")){
+                studyPlan.addTopic(selected);
+                studyPlan.updateOptions(spAction, spSelectedTopics, spSelectedCourses);
+                output.append("Added topic: " + selected + "to studyplan\n");
             }
         });
     }
