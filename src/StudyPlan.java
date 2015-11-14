@@ -90,6 +90,12 @@ public class StudyPlan{
         if(topics.size() == 0 && courses.size() == 1){ //UC3
             spAction.addItem(planTypeMap.get(PLAN_TYPE.COURSE_PREREQUISITES_FOR_COURSE));
         }
+        if(topics.size() == 0 && courses.size() > 0) { //UC4
+            spAction.addItem(planTypeMap.get(PLAN_TYPE.TOPICS_IN_COURSES));
+        }
+        if(topics.size() > 1 && courses.size() == 0) { //UC5
+            spAction.addItem(planTypeMap.get(PLAN_TYPE.SUBTOPICS_OF_TOPIC));
+        }
 
 
         if(spAction.getItemCount() <= 0)
@@ -107,35 +113,51 @@ public class StudyPlan{
         for(Map.Entry<PLAN_TYPE, String> entry : planTypeMap.entrySet()){
             if(selectedType.equals(entry.getValue())){
                 Sparql sparql;
+                String sparqlQueryString = "";
                 switch (entry.getKey()){
                     case COURSES_WITH_TOPIC: //Use Case 1
-                        sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?course ?part\n" +
+                        sparqlQueryString = "SELECT DISTINCT ?course ?part\n" +
                                 "WHERE {\n" +
                                 "\t?course j:hasTopic <"+selTopics.getItemAt(0).toString()+"> .\n" +
                                 "\tOPTIONAL { ?part j:isPracticalPart <"+selTopics.getItemAt(0).toString()+"> }\n" +
-                                "}");
+                                "}";
                         break;
                     case PREREQUISITES_OF_COURSES_TOPICS: //Use Case 2
-                        sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?topic\n" +
+                        sparqlQueryString = "SELECT DISTINCT ?topic\n" +
                                 "WHERE {\n" +
                                 "\t?topic j:isRequirement* ?depTop .\n" +
                                 "\t?depTop j:isTopicOf <"+selCourses.getItemAt(0).toString()+"> .\n" +
                                 "\tMINUS { ?topic j:isTopicOf <"+selCourses.getItemAt(0).toString()+"> }\n" +
-                                "}");
+                                "}";
                         break;
                     case COURSE_PREREQUISITES_FOR_COURSE: //Use Case 3
-                        sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?precourse\n" +
+                        sparqlQueryString = "SELECT DISTINCT ?precourse\n" +
                                 "WHERE {\n" +
                                 "\t<"+selCourses.getItemAt(0).toString()+"> j:hasTopic ?courseTopic .\n" +
                                 "\t?courseTopic j:hasRequirement* ?pretopic .\n" +
                                 "\t?pretopic j:isTopicOf ?precourse .\n" +
                                 "\tMINUS { ?pretopic j:isTopicOf <"+selCourses.getItemAt(0).toString()+"> }\n" +
-                                "}");
+                                "}";
                         break;
+                    case TOPICS_IN_COURSES: //Use Case 4
+                        sparqlQueryString = "SELECT DISTINCT ?course ?topic\n" +
+                                "WHERE {\n" +
+                                "\t{?course j:hasTopic ?topic} .\n";
+                        for(int i = 0; i<selCourses.getItemCount();i++){
+                            if(i == 0){
+                                sparqlQueryString += "\t{<"+selCourses.getItemAt(i).toString()+"> j:hasTopic ?topic}\n";
+                            }else{
+                                sparqlQueryString += "\tUNION {<"+selCourses.getItemAt(i).toString()+"> j:hasTopic ?topic}\n";
+                            }
+                        }
+                        sparqlQueryString += "\t}";
+                        break;
+
                     default:
                         output.append("Some error happened...");
                         return;
                 }
+                sparql = new Sparql(ontology.getModel(), sparqlQueryString);
                 new ResultWindow(entry.getValue(), sparql.executeQuery());
             }
         }

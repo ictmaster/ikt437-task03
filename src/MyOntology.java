@@ -46,7 +46,7 @@ public class MyOntology {
         this.model = model;
         addProperties();
         createClasses();
-        FileHandler.importModel(this.model, "ont.ttl");
+        FileHandler.importModel(this.model, "new_test.ttl");
         //addStartData();
     }
 
