@@ -1,7 +1,10 @@
+import org.apache.jena.base.Sys;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudyPlan{
     private List<String> topics;
@@ -14,8 +17,8 @@ public class StudyPlan{
     private HashMap<PLAN_TYPE,String> planTypeMap;
     private enum PLAN_TYPE{
         COURSES_WITH_TOPIC,                 //case1 - 1 , 0
-        PREREQUICITES_OF_COURSES_TOPICS,    //case2 - 0 , 1
-        COURSE_PREREQUICTES_FOR_COURSE,     //case3 - 0 , 1
+        PREREQUISITES_OF_COURSES_TOPICS,    //case2 - 0 , 1
+        COURSE_PREREQUISITES_FOR_COURSE,     //case3 - 0 , 1
         TOPICS_IN_COURSES,                  //case4 - 0 , 1+
         SUBTOPICS_OF_TOPIC                  //case5 - 2+, 0 // make first one 'main' topic
     }
@@ -31,8 +34,8 @@ public class StudyPlan{
         courses = new ArrayList<>();
         planTypeMap = new HashMap<>();
         planTypeMap.put(PLAN_TYPE.COURSES_WITH_TOPIC, "Courses with selected topic");
-        planTypeMap.put(PLAN_TYPE.PREREQUICITES_OF_COURSES_TOPICS, "Required knowledge to follow course");
-        planTypeMap.put(PLAN_TYPE.COURSE_PREREQUICTES_FOR_COURSE, "Prerequisite courses");
+        planTypeMap.put(PLAN_TYPE.PREREQUISITES_OF_COURSES_TOPICS, "Required knowledge to follow course");
+        planTypeMap.put(PLAN_TYPE.COURSE_PREREQUISITES_FOR_COURSE, "Prerequisite courses");
         planTypeMap.put(PLAN_TYPE.TOPICS_IN_COURSES, "Topics thought in courses");
         planTypeMap.put(PLAN_TYPE.SUBTOPICS_OF_TOPIC, "Subtopics covered");
     }
@@ -95,7 +98,21 @@ public class StudyPlan{
     }
 
     public void displayPlan(){
-
+        String selectedType = spAction.getSelectedItem().toString();
+        for(Map.Entry<PLAN_TYPE, String> entry : planTypeMap.entrySet()){
+            if(selectedType.equals(entry.getValue())){
+                switch (entry.getKey()){
+                    case COURSES_WITH_TOPIC: //Use Case 1
+                        Sparql sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?course ?part\n" +
+                                "WHERE {\n" +
+                                "\t?course j:hasTopic <"+selTopics.getItemAt(0).toString()+"> .\n" +
+                                "\tOPTIONAL { ?part j:isPracticalPart <"+selTopics.getItemAt(0).toString()+"> }\n" +
+                                "}");
+                        new ResultWindow(entry.getValue(), sparql.executeQuery());
+                        break;
+                }
+            }
+        }
     }
 
 

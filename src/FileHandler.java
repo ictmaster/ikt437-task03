@@ -1,5 +1,4 @@
 import org.apache.jena.ontology.OntModel;
-import org.apache.jena.rdf.model.ModelFactory;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

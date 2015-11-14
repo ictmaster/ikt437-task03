@@ -207,6 +207,8 @@ public class GUI extends JFrame {
             studyPlan.deleteCourse(spSelectedCourses.getSelectedItem().toString());
             populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
         });
+        spGetInfoButton.addActionListener(e -> studyPlan.displayPlan());
+
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
