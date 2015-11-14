@@ -1,5 +1,4 @@
 import org.apache.jena.ontology.OntModel;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
@@ -30,9 +29,6 @@ public class FileHandler {
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
             return false;
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            return false;
         }
     }
 
@@ -44,8 +40,6 @@ public class FileHandler {
             return false;
         }
     }
-
-
 
     public static boolean exportModel(OntModel model){
         FileWriter out = null;
@@ -74,6 +68,7 @@ public class FileHandler {
                 try {
                     out.close();
                 } catch (IOException ignore) {
+                    ignore.printStackTrace();
                 }
             }
         }
