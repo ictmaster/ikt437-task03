@@ -190,10 +190,23 @@ public class GUI extends JFrame {
             }
         });
         studyPlan.updateDropdowns(spSelectedTopics, spSelectedCourses, spAction);
-        spTopicAddButton.addActionListener(e -> studyPlan.addTopic(spTopics.getSelectedItem().toString()));
-        spCourseAddButton.addActionListener(e -> studyPlan.addCourse(spCourses.getSelectedItem().toString()));
-        spDeleteTopicButton.addActionListener(e -> studyPlan.deleteTopic(spSelectedTopics.getSelectedItem().toString()));
-        spDeleteCoursesButton.addActionListener(e -> studyPlan.deleteCourse(spSelectedCourses.getSelectedItem().toString()));
+        spTopicAddButton.addActionListener(e -> {
+            studyPlan.addTopic(spTopics.getSelectedItem().toString());
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+        });
+        spCourseAddButton.addActionListener(e -> {
+            studyPlan.addCourse(spCourses.getSelectedItem().toString());
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+        });
+
+        spDeleteTopicButton.addActionListener(e -> {
+            studyPlan.deleteTopic(spSelectedTopics.getSelectedItem().toString());
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+        });
+        spDeleteCoursesButton.addActionListener(e -> {
+            studyPlan.deleteCourse(spSelectedCourses.getSelectedItem().toString());
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+        });
     }
 
     public void populateDropDown(Model model, Resource topics, Resource courses) {
@@ -217,7 +230,9 @@ public class GUI extends JFrame {
             subtopicOf.addItem(item);
             deleteTopicDrop.addItem(item);
             courseTopicDrop.addItem(item);
-            spTopics.addItem(item);
+
+            if(((DefaultComboBoxModel)spSelectedTopics.getModel()).getIndexOf(item) == -1)
+                spTopics.addItem(item);
         }
 
         typeDrop.addItem("Presentation");
@@ -232,9 +247,8 @@ public class GUI extends JFrame {
         //Courses
         for (String item : resourceList){
             deleteCourseDrop.addItem(item);
-            spCourses.addItem(item);
+            if(((DefaultComboBoxModel)spSelectedCourses.getModel()).getIndexOf(item) == -1)
+                spCourses.addItem(item);
         }
-
-
     }
 }
