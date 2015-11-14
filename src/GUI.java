@@ -192,22 +192,25 @@ public class GUI extends JFrame {
         studyPlan.updateDropdowns(spSelectedTopics, spSelectedCourses, spAction);
         spTopicAddButton.addActionListener(e -> {
             studyPlan.addTopic(spTopics.getSelectedItem().toString());
-            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+            populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
         });
         spCourseAddButton.addActionListener(e -> {
             studyPlan.addCourse(spCourses.getSelectedItem().toString());
-            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+            populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
         });
 
         spDeleteTopicButton.addActionListener(e -> {
             studyPlan.deleteTopic(spSelectedTopics.getSelectedItem().toString());
-            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+            populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
         });
         spDeleteCoursesButton.addActionListener(e -> {
             studyPlan.deleteCourse(spSelectedCourses.getSelectedItem().toString());
-            populateDropDown(mOnt.getModel(),mOnt.getTopics(),mOnt.getCourses());
+            populateDropDown(mOnt.getModel(), mOnt.getTopics(), mOnt.getCourses());
         });
-        spGetInfoButton.addActionListener(e -> studyPlan.displayPlan());
+        spGetInfoButton.addActionListener(e -> {
+            studyPlan.displayPlan();
+            populateDropDown(mOnt.getModel(),mOnt.getTopics(), mOnt.getCourses());
+        });
 
     }
 

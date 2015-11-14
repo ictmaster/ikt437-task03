@@ -85,7 +85,9 @@ public class StudyPlan{
         if(topics.size() == 1 && courses.size() == 0){
             spAction.addItem(planTypeMap.get(PLAN_TYPE.COURSES_WITH_TOPIC));
         }
-
+        if(topics.size() == 0 && courses.size() == 1){
+            spAction.addItem(planTypeMap.get(PLAN_TYPE.PREREQUISITES_OF_COURSES_TOPICS));
+        }
 
         if(spAction.getItemCount() <= 0)
             spAction.addItem("No action available");
@@ -101,18 +103,31 @@ public class StudyPlan{
         String selectedType = spAction.getSelectedItem().toString();
         for(Map.Entry<PLAN_TYPE, String> entry : planTypeMap.entrySet()){
             if(selectedType.equals(entry.getValue())){
+                Sparql sparql;
                 switch (entry.getKey()){
                     case COURSES_WITH_TOPIC: //Use Case 1
-                        Sparql sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?course ?part\n" +
+                        sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?course ?part\n" +
                                 "WHERE {\n" +
                                 "\t?course j:hasTopic <"+selTopics.getItemAt(0).toString()+"> .\n" +
                                 "\tOPTIONAL { ?part j:isPracticalPart <"+selTopics.getItemAt(0).toString()+"> }\n" +
                                 "}");
                         new ResultWindow(entry.getValue(), sparql.executeQuery());
                         break;
+                    case PREREQUISITES_OF_COURSES_TOPICS: //Use Case 2
+                        sparql = new Sparql(ontology.getModel(), "SELECT DISTINCT ?topic\n" +
+                                "WHERE {\n" +
+                                "\t?topic j:isRequirement ?depTop .\n" +
+                                "\t?depTop j:isTopicOf <"+selCourses.getItemAt(0).toString()+"> .\n" +
+                                "\tMINUS { ?topic j:isTopicOf <"+selCourses.getItemAt(0).toString()+"> }\n" +
+                                "}");
+                        new ResultWindow(entry.getValue(), sparql.executeQuery());
+                        break;
                 }
             }
         }
+        topics.clear();
+        courses.clear();
+        updateOptions();
     }
 
 
