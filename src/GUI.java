@@ -109,8 +109,8 @@ public class GUI extends JFrame {
 
             if (!subtopics.isEmpty()) {
                 for (String item : subtopics) {
-                    newResource.addProperty(MyOntology.hasSubtopic, mOnt.getModel().getIndividual(item));
-                    mOnt.getModel().getIndividual(item).addProperty(MyOntology.isSubtopicOf, newResource);
+                    newResource.addProperty(MyOntology.isSubtopicOf, mOnt.getModel().getIndividual(item));
+                    mOnt.getModel().getIndividual(item).addProperty(MyOntology.hasSubtopic, newResource);
                 }
             }
 

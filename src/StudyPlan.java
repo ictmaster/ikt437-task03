@@ -152,6 +152,9 @@ public class StudyPlan{
                         }
                         sparqlQueryString += "\t}";
                         break;
+                    case SUBTOPICS_OF_TOPIC:
+                        
+                        break;
 
                     default:
                         output.append("Some error happened...");
